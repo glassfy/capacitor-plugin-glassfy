@@ -6,7 +6,7 @@
 
 ### CapacitorJS Glassfy Plugin
 
-[Glassfy](https://Glassfy.is/) is a subscription revenue optimisation infrastructure for mobile applications.
+[Glassfy](https://glassfy.io/) is a subscription revenue optimisation infrastructure for mobile applications.
 
 ### Getting Started
 
@@ -23,7 +23,10 @@ npx cap sync
 
 ## Build plugin and example
 
+be sure to have ionic cli installed following instructions [here](https://ionicframework.com/docs/intro/cli)
+
 ```
+
 npm install
 npm run build
 cd example
