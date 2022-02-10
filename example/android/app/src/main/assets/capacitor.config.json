@@ -1,0 +1,6 @@
+{
+	"appId": "io.glassfy.plugin.example",
+	"appName": "example",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}
