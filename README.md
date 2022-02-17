@@ -1,8 +1,4 @@
-<p align="center">
-  <img src="https://glassfy.io/assets/images/glassfy-logo.svg" height="70"/>
-</p>
-
----
+<img src="https://media.glassfy.io/banner_purple.png" />
 
 ### CapacitorJS Glassfy Plugin
 
