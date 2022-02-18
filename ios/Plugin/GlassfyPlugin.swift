@@ -100,6 +100,7 @@ public class GlassfyPlugin: CAPPlugin {
     }
     @objc func purchaseSku(_ call: CAPPluginCall) {
         guard let sku = call.getObject("sku") else {
+            call.reject("Invalid SKU")
             return
         }
                 
@@ -110,6 +111,8 @@ public class GlassfyPlugin: CAPPlugin {
             }
             if let sku = sku {
                 call.resolve(sku)
+            } else {
+                call.reject("impossible to purchase the SKU")
             }
         }
     }
@@ -184,8 +187,4 @@ public class GlassfyPlugin: CAPPlugin {
         }
         call.resolve()
     }
-
-
-    
-
 }

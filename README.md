@@ -35,21 +35,21 @@ ionic capacitor open ios
 
 <docgen-index>
 
-- [`sdkVersion()`](#sdkversion)
-- [`initialize(...)`](#initialize)
-- [`offerings()`](#offerings)
-- [`skuWithIdentifier(...)`](#skuwithidentifier)
-- [`login(...)`](#login)
-- [`logout()`](#logout)
-- [`permissions()`](#permissions)
-- [`purchaseSku(...)`](#purchasesku)
-- [`restorePurchases()`](#restorepurchases)
-- [`setLogLevel(...)`](#setloglevel)
-- [`setDeviceToken(...)`](#setdevicetoken)
-- [`setExtraUserProperty(...)`](#setextrauserproperty)
-- [`getUserProperty()`](#getuserproperty)
-- [Interfaces](#interfaces)
-- [Enums](#enums)
+* [`sdkVersion()`](#sdkversion)
+* [`initialize(...)`](#initialize)
+* [`offerings()`](#offerings)
+* [`skuWithIdentifier(...)`](#skuwithidentifier)
+* [`login(...)`](#login)
+* [`logout()`](#logout)
+* [`permissions()`](#permissions)
+* [`purchaseSku(...)`](#purchasesku)
+* [`restorePurchases()`](#restorepurchases)
+* [`setLogLevel(...)`](#setloglevel)
+* [`setDeviceToken(...)`](#setdevicetoken)
+* [`setExtraUserProperty(...)`](#setextrauserproperty)
+* [`getUserProperty()`](#getuserproperty)
+* [Interfaces](#interfaces)
+* [Enums](#enums)
 
 </docgen-index>
 
@@ -64,7 +64,8 @@ sdkVersion() => Promise<GlassfyVersion>
 
 **Returns:** <code>Promise&lt;<a href="#glassfyversion">GlassfyVersion</a>&gt;</code>
 
----
+--------------------
+
 
 ### initialize(...)
 
@@ -78,7 +79,8 @@ For more details, follow instruction at https://docs.glassfy.io/get-started/conf
 | ------------- | ------------------------------------------------------ |
 | **`options`** | <code>{ apiKey: string; watcherMode: boolean; }</code> |
 
----
+--------------------
+
 
 ### offerings()
 
@@ -90,7 +92,8 @@ For more details, check the documentation https://docs.glassfy.io/dashboard/conf
 
 **Returns:** <code>Promise&lt;<a href="#glassfyofferings">GlassfyOfferings</a>&gt;</code>
 
----
+--------------------
+
 
 ### skuWithIdentifier(...)
 
@@ -106,7 +109,8 @@ For more details, check the documentation https://docs.glassfy.io/dashboard/conf
 
 **Returns:** <code>Promise&lt;<a href="#glassfysku">GlassfySku</a>&gt;</code>
 
----
+--------------------
+
 
 ### login(...)
 
@@ -118,7 +122,8 @@ login(options: { userid: string; }) => Promise<void>
 | ------------- | -------------------------------- |
 | **`options`** | <code>{ userid: string; }</code> |
 
----
+--------------------
+
 
 ### logout()
 
@@ -126,7 +131,8 @@ login(options: { userid: string; }) => Promise<void>
 logout() => Promise<void>
 ```
 
----
+--------------------
+
 
 ### permissions()
 
@@ -138,21 +144,23 @@ For more details, check the documentation https://docs.glassfy.io/dashboard/conf
 
 **Returns:** <code>Promise&lt;<a href="#glassfypermissions">GlassfyPermissions</a>&gt;</code>
 
----
+--------------------
+
 
 ### purchaseSku(...)
 
 ```typescript
-purchaseSku(options: { sku: GlassfySku; }) => Promise<GlassfySku>
+purchaseSku(options: { sku: GlassfySku; }) => Promise<GlassfyTransaction>
 ```
 
 | Param         | Type                                                        |
 | ------------- | ----------------------------------------------------------- |
 | **`options`** | <code>{ sku: <a href="#glassfysku">GlassfySku</a>; }</code> |
 
-**Returns:** <code>Promise&lt;<a href="#glassfysku">GlassfySku</a>&gt;</code>
+**Returns:** <code>Promise&lt;<a href="#glassfytransaction">GlassfyTransaction</a>&gt;</code>
 
----
+--------------------
+
 
 ### restorePurchases()
 
@@ -162,7 +170,8 @@ restorePurchases() => Promise<GlassfyPermissions>
 
 **Returns:** <code>Promise&lt;<a href="#glassfypermissions">GlassfyPermissions</a>&gt;</code>
 
----
+--------------------
+
 
 ### setLogLevel(...)
 
@@ -174,7 +183,8 @@ setLogLevel(options: { logLevel: GLASSFY_LOGLEVEL; }) => Promise<void>
 | ------------- | ---------------------------------------------------------------------------- |
 | **`options`** | <code>{ logLevel: <a href="#glassfy_loglevel">GLASSFY_LOGLEVEL</a>; }</code> |
 
----
+--------------------
+
 
 ### setDeviceToken(...)
 
@@ -186,7 +196,8 @@ setDeviceToken(options: { token: string; }) => Promise<void>
 | ------------- | ------------------------------- |
 | **`options`** | <code>{ token: string; }</code> |
 
----
+--------------------
+
 
 ### setExtraUserProperty(...)
 
@@ -198,7 +209,8 @@ setExtraUserProperty(options: { extraProperty: [string: any]; }) => Promise<void
 | ------------- | ---------------------------------------------- |
 | **`options`** | <code>{ extraProperty: [string: any]; }</code> |
 
----
+--------------------
+
 
 ### getUserProperty()
 
@@ -206,9 +218,11 @@ setExtraUserProperty(options: { extraProperty: [string: any]; }) => Promise<void
 getUserProperty() => Promise<void>
 ```
 
----
+--------------------
+
 
 ### Interfaces
+
 
 #### GlassfyVersion
 
@@ -216,11 +230,13 @@ getUserProperty() => Promise<void>
 | ------------- | ------------------- |
 | **`version`** | <code>string</code> |
 
+
 #### GlassfyOfferings
 
 | Prop      | Type                           |
 | --------- | ------------------------------ |
 | **`all`** | <code>[GlassfyOffering]</code> |
+
 
 #### GlassfyOffering
 
@@ -228,6 +244,7 @@ getUserProperty() => Promise<void>
 | ---------------- | ------------------------- |
 | **`identifier`** | <code>string</code>       |
 | **`skus`**       | <code>[GlassfySku]</code> |
+
 
 #### GlassfySku
 
@@ -239,6 +256,7 @@ getUserProperty() => Promise<void>
 | **`promotionalEligibility`**  | <code><a href="#glassfy_eleggibility">GLASSFY_ELEGGIBILITY</a></code> |
 | **`extravars`**               | <code>{ [key: string]: string; }</code>                               |
 
+
 #### GlassfyPermissions
 
 | Prop                             | Type                             |
@@ -248,6 +266,7 @@ getUserProperty() => Promise<void>
 | **`originalApplicationVersion`** | <code>string</code>              |
 | **`originalApplicationDate`**    | <code>string</code>              |
 | **`all`**                        | <code>[GlassfyPermission]</code> |
+
 
 #### GlassfyPermission
 
@@ -259,7 +278,18 @@ getUserProperty() => Promise<void>
 | **`expireDate`**           | <code>string</code>                                                 |
 | **`accountableSkus`**      | <code>[string]</code>                                               |
 
+
+#### GlassfyTransaction
+
+| Prop                    | Type                                                              |
+| ----------------------- | ----------------------------------------------------------------- |
+| **`productIdentifier`** | <code>string</code>                                               |
+| **`receiptValidated`**  | <code>boolean</code>                                              |
+| **`permissions`**       | <code><a href="#glassfypermissions">GlassfyPermissions</a></code> |
+
+
 ### Enums
+
 
 #### GLASSFY_ELEGGIBILITY
 
@@ -268,6 +298,7 @@ getUserProperty() => Promise<void>
 | **`ELEGIBLE`**     | <code>1</code>  |
 | **`NON_ELEGIBLE`** | <code>-1</code> |
 | **`UNKNOWN`**      | <code>0</code>  |
+
 
 #### GLASSFY_ENTITLEMENT
 
@@ -288,6 +319,7 @@ getUserProperty() => Promise<void>
 | **`NONRENEWING`**          | <code>3</code>  |
 | **`AUTORENEWOFF`**         | <code>4</code>  |
 | **`AUTORENEWON`**          | <code>5</code>  |
+
 
 #### GLASSFY_LOGLEVEL
 

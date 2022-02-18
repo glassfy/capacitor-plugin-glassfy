@@ -1,6 +1,6 @@
 import { WebPlugin } from '@capacitor/core';
 
-import type { GlassfyPlugin, GlassfyVersion, GlassfyOfferings, GlassfySku, GlassfyPermissions, GLASSFY_LOGLEVEL } from './definitions';
+import type { GlassfyPlugin, GlassfyVersion, GlassfyOfferings, GlassfySku, GlassfyPermissions, GLASSFY_LOGLEVEL, GlassfyTransaction } from './definitions';
 
 export class GlassfyWeb extends WebPlugin implements GlassfyPlugin {
 
@@ -36,7 +36,7 @@ export class GlassfyWeb extends WebPlugin implements GlassfyPlugin {
     throw this.unimplemented('Not supported on web.');
   }
 
-  async purchaseSku(options: { sku: GlassfySku }): Promise<GlassfySku> {
+  async purchaseSku(options: { sku: GlassfySku }): Promise<GlassfyTransaction> {
     console.log(options);
     throw this.unimplemented('Not supported on web.');
 

@@ -90,6 +90,13 @@ export interface GlassfyPermissions {
   readonly all: [GlassfyPermission];
 }
 
+export interface GlassfyTransaction {
+  readonly productIdentifier: string,
+  readonly receiptValidated: boolean;
+  readonly permissions: GlassfyPermissions;
+}
+
+
 export interface GlassfyPlugin {
   sdkVersion(): Promise<GlassfyVersion>;
 
@@ -118,7 +125,7 @@ export interface GlassfyPlugin {
 
   permissions(): Promise<GlassfyPermissions>;
 
-  purchaseSku(options: { sku: GlassfySku }): Promise<GlassfySku>;
+  purchaseSku(options: { sku: GlassfySku }): Promise<GlassfyTransaction>;
 
   restorePurchases(): Promise<GlassfyPermissions>;
 
