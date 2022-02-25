@@ -58,7 +58,7 @@ export interface GlassfyVersion {
 }
 
 export interface GlassfySku {
-  readonly identifier: string;
+  readonly skuId: string;
   readonly productId: string;
   readonly introductoryEligibility: GLASSFY_ELEGGIBILITY;
   readonly promotionalEligibility: GLASSFY_ELEGGIBILITY;
@@ -66,7 +66,7 @@ export interface GlassfySku {
 }
 
 export interface GlassfyOffering {
-  readonly identifier: string;
+  readonly offeringId: string;
   readonly skus: [GlassfySku];
 }
 
@@ -74,7 +74,7 @@ export interface GlassfyOfferings {
   readonly all: [GlassfyOffering];
 }
 export interface GlassfyPermission {
-  readonly permissionIdentifier: string;
+  readonly permissionId: string;
   readonly entitlement: GLASSFY_ENTITLEMENT;
   readonly isValid: boolean;
   readonly expireDate: string;
@@ -91,7 +91,7 @@ export interface GlassfyPermissions {
 }
 
 export interface GlassfyTransaction {
-  readonly productIdentifier: string,
+  readonly productId: string,
   readonly receiptValidated: boolean;
   readonly permissions: GlassfyPermissions;
 }
@@ -113,7 +113,7 @@ export interface GlassfyPlugin {
   /**
   *  For more details, check the documentation https://docs.glassfy.io/dashboard/configure-products
   */
-  skuWithIdentifier(options: { identifier: string }): Promise<GlassfySku>;
+  skuWithId(options: { identifier: string }): Promise<GlassfySku>;
 
   login(options: { userid: string }): Promise<void>;
 

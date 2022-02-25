@@ -50,7 +50,7 @@ export class HomePage implements AfterViewInit {
         console.log(offer);
       });
 
-      let sku = await Glassfy.skuWithIdentifier({ identifier: "weekly_magazine_subscription" })
+      let sku = await Glassfy.skuWithId({ identifier: "weekly_magazine_subscription" })
       console.log(sku)
 
       let transaction = await Glassfy.purchaseSku({ sku: sku })

@@ -18,7 +18,7 @@ export class GlassfyWeb extends WebPlugin implements GlassfyPlugin {
     throw this.unimplemented('Not supported on web.');
   }
 
-  async skuWithIdentifier(options: { identifier: string }): Promise<GlassfySku> {
+  async skuWithId(options: { identifier: string }): Promise<GlassfySku> {
     console.log(options);
     throw this.unimplemented('Not supported on web.');
   }

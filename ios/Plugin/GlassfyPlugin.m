@@ -7,7 +7,7 @@ CAP_PLUGIN(GlassfyPlugin, "Glassfy",
     CAP_PLUGIN_METHOD(sdkVersion, CAPPluginReturnPromise);
     CAP_PLUGIN_METHOD(initialize, CAPPluginReturnPromise);
     CAP_PLUGIN_METHOD(offerings, CAPPluginReturnPromise);
-    CAP_PLUGIN_METHOD(skuWithIdentifier, CAPPluginReturnPromise);
+    CAP_PLUGIN_METHOD(skuWithId, CAPPluginReturnPromise);
     CAP_PLUGIN_METHOD(login, CAPPluginReturnPromise);
     CAP_PLUGIN_METHOD(logout, CAPPluginReturnPromise);
     CAP_PLUGIN_METHOD(purchaseSku, CAPPluginReturnPromise);

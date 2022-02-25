@@ -47,12 +47,12 @@ public class GlassfyPlugin: CAPPlugin {
         }
     }
 
-    @objc func skuWithIdentifier(_ call: CAPPluginCall) {
+    @objc func skuWithId(_ call: CAPPluginCall) {
         guard let identifier = call.getString("identifier") else {
             call.reject("invalid skuWithIdentifier parameters")
             return
         }
-        GlassfyGlue.sku(withIdentifier: identifier) { sku, error in
+        GlassfyGlue.sku(withId: identifier) { sku, error in
             if let error = error {
                 call.reject(error.localizedDescription)
                 return

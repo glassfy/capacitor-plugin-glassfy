@@ -38,7 +38,7 @@ ionic capacitor open ios
 * [`sdkVersion()`](#sdkversion)
 * [`initialize(...)`](#initialize)
 * [`offerings()`](#offerings)
-* [`skuWithIdentifier(...)`](#skuwithidentifier)
+* [`skuWithId(...)`](#skuwithid)
 * [`login(...)`](#login)
 * [`logout()`](#logout)
 * [`permissions()`](#permissions)
@@ -95,10 +95,10 @@ For more details, check the documentation https://docs.glassfy.io/dashboard/conf
 --------------------
 
 
-### skuWithIdentifier(...)
+### skuWithId(...)
 
 ```typescript
-skuWithIdentifier(options: { identifier: string; }) => Promise<GlassfySku>
+skuWithId(options: { identifier: string; }) => Promise<GlassfySku>
 ```
 
 For more details, check the documentation https://docs.glassfy.io/dashboard/configure-products
@@ -242,7 +242,7 @@ getUserProperty() => Promise<void>
 
 | Prop             | Type                      |
 | ---------------- | ------------------------- |
-| **`identifier`** | <code>string</code>       |
+| **`offeringId`** | <code>string</code>       |
 | **`skus`**       | <code>[GlassfySku]</code> |
 
 
@@ -250,7 +250,7 @@ getUserProperty() => Promise<void>
 
 | Prop                          | Type                                                                  |
 | ----------------------------- | --------------------------------------------------------------------- |
-| **`identifier`**              | <code>string</code>                                                   |
+| **`skuId`**                   | <code>string</code>                                                   |
 | **`productId`**               | <code>string</code>                                                   |
 | **`introductoryEligibility`** | <code><a href="#glassfy_eleggibility">GLASSFY_ELEGGIBILITY</a></code> |
 | **`promotionalEligibility`**  | <code><a href="#glassfy_eleggibility">GLASSFY_ELEGGIBILITY</a></code> |
@@ -270,22 +270,22 @@ getUserProperty() => Promise<void>
 
 #### GlassfyPermission
 
-| Prop                       | Type                                                                |
-| -------------------------- | ------------------------------------------------------------------- |
-| **`permissionIdentifier`** | <code>string</code>                                                 |
-| **`entitlement`**          | <code><a href="#glassfy_entitlement">GLASSFY_ENTITLEMENT</a></code> |
-| **`isValid`**              | <code>boolean</code>                                                |
-| **`expireDate`**           | <code>string</code>                                                 |
-| **`accountableSkus`**      | <code>[string]</code>                                               |
+| Prop                  | Type                                                                |
+| --------------------- | ------------------------------------------------------------------- |
+| **`permissionId`**    | <code>string</code>                                                 |
+| **`entitlement`**     | <code><a href="#glassfy_entitlement">GLASSFY_ENTITLEMENT</a></code> |
+| **`isValid`**         | <code>boolean</code>                                                |
+| **`expireDate`**      | <code>string</code>                                                 |
+| **`accountableSkus`** | <code>[string]</code>                                               |
 
 
 #### GlassfyTransaction
 
-| Prop                    | Type                                                              |
-| ----------------------- | ----------------------------------------------------------------- |
-| **`productIdentifier`** | <code>string</code>                                               |
-| **`receiptValidated`**  | <code>boolean</code>                                              |
-| **`permissions`**       | <code><a href="#glassfypermissions">GlassfyPermissions</a></code> |
+| Prop                   | Type                                                              |
+| ---------------------- | ----------------------------------------------------------------- |
+| **`productId`**        | <code>string</code>                                               |
+| **`receiptValidated`** | <code>boolean</code>                                              |
+| **`permissions`**      | <code><a href="#glassfypermissions">GlassfyPermissions</a></code> |
 
 
 ### Enums
