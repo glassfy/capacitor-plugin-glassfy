@@ -138,7 +138,6 @@ public class GlassfyPlugin: CAPPlugin {
         if let ll = Glassfy.LogLevel(rawValue: UInt(logLevel)) {
             Glassfy.log(level: ll)
         }
-        call.resolve()
     }
     
     @objc func setDeviceToken(_ call: CAPPluginCall) {
@@ -154,7 +153,6 @@ public class GlassfyPlugin: CAPPlugin {
             }
             call.resolve()
         }
-        call.resolve()
     }
     
     
@@ -171,10 +169,9 @@ public class GlassfyPlugin: CAPPlugin {
             }
             call.resolve()
         }
-        call.resolve()
     }
 
-    @objc func getExtraUserProperty(_ call: CAPPluginCall) {
+    @objc func getUserProperty(_ call: CAPPluginCall) {
         
         GlassfyGlue.getExtraUserProperty() { extra, error in
             if let error = error {
@@ -185,6 +182,5 @@ public class GlassfyPlugin: CAPPlugin {
                 call.resolve(extra)
             }
         }
-        call.resolve()
     }
 }

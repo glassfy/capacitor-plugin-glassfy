@@ -56,12 +56,12 @@ export class GlassfyWeb extends WebPlugin implements GlassfyPlugin {
     throw this.unimplemented('Not supported on web.');
   }
 
-  async setExtraUserProperty(options: { extraProperty: [string: any] }): Promise<void> {
+  async setExtraUserProperty(options: { extra: { [key: string]: any } }): Promise<void> {
     console.log(options);
     throw this.unimplemented('Not supported on web.');
   }
 
-  async getUserProperty(): Promise<void> {
+  async getUserProperty(): Promise<{ extra: { [key: string]: any } }> {
     throw this.unimplemented('Not supported on web.');
   }
 

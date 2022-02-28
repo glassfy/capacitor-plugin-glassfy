@@ -202,12 +202,12 @@ setDeviceToken(options: { token: string; }) => Promise<void>
 ### setExtraUserProperty(...)
 
 ```typescript
-setExtraUserProperty(options: { extraProperty: [string: any]; }) => Promise<void>
+setExtraUserProperty(options: { extra: { [key: string]: any; }; }) => Promise<void>
 ```
 
-| Param         | Type                                           |
-| ------------- | ---------------------------------------------- |
-| **`options`** | <code>{ extraProperty: [string: any]; }</code> |
+| Param         | Type                                             |
+| ------------- | ------------------------------------------------ |
+| **`options`** | <code>{ extra: { [key: string]: any; }; }</code> |
 
 --------------------
 
@@ -215,8 +215,10 @@ setExtraUserProperty(options: { extraProperty: [string: any]; }) => Promise<void
 ### getUserProperty()
 
 ```typescript
-getUserProperty() => Promise<void>
+getUserProperty() => Promise<{ extra: { [key: string]: any; }; }>
 ```
+
+**Returns:** <code>Promise&lt;{ extra: { [key: string]: any; }; }&gt;</code>
 
 --------------------
 
@@ -248,13 +250,13 @@ getUserProperty() => Promise<void>
 
 #### GlassfySku
 
-| Prop                          | Type                                                                  |
-| ----------------------------- | --------------------------------------------------------------------- |
-| **`skuId`**                   | <code>string</code>                                                   |
-| **`productId`**               | <code>string</code>                                                   |
-| **`introductoryEligibility`** | <code><a href="#glassfy_eleggibility">GLASSFY_ELEGGIBILITY</a></code> |
-| **`promotionalEligibility`**  | <code><a href="#glassfy_eleggibility">GLASSFY_ELEGGIBILITY</a></code> |
-| **`extravars`**               | <code>{ [key: string]: string; }</code>                               |
+| Prop                          | Type                                                                |
+| ----------------------------- | ------------------------------------------------------------------- |
+| **`skuId`**                   | <code>string</code>                                                 |
+| **`productId`**               | <code>string</code>                                                 |
+| **`introductoryEligibility`** | <code><a href="#glassfy_eligibility">GLASSFY_ELIGIBILITY</a></code> |
+| **`promotionalEligibility`**  | <code><a href="#glassfy_eligibility">GLASSFY_ELIGIBILITY</a></code> |
+| **`extravars`**               | <code>{ [key: string]: string; }</code>                             |
 
 
 #### GlassfyPermissions
@@ -291,7 +293,7 @@ getUserProperty() => Promise<void>
 ### Enums
 
 
-#### GLASSFY_ELEGGIBILITY
+#### GLASSFY_ELIGIBILITY
 
 | Members            | Value           |
 | ------------------ | --------------- |

@@ -1,6 +1,6 @@
 import { AfterViewInit, Component } from '@angular/core';
 import { AlertController } from '@ionic/angular';
-import { Glassfy, GlassfyOfferings, GlassfyOffering, GlassfySku } from 'capacitor-plugin-glassfy';
+import { Glassfy, GlassfyOfferings, GlassfyOffering } from 'capacitor-plugin-glassfy';
 
 @Component({
   selector: 'app-home',
@@ -36,7 +36,16 @@ export class HomePage implements AfterViewInit {
 
       await Glassfy.initialize({ apiKey: "my_api_key", watcherMode: false });
 
-    } catch (err) {
+      await Glassfy.setExtraUserProperty({ extra: { "key1": "value1" } });
+
+      let extra = await Glassfy.getUserProperty();
+
+      console.log("Extra " + extra);
+
+    } catch (error) {
+      let message = 'Unknown Error'
+      if (error instanceof Error) message = error.message
+      await this.presentAlert(message);
 
     }
   }
@@ -58,11 +67,14 @@ export class HomePage implements AfterViewInit {
       this.presentAlert(JSON.stringify(transaction))
 
 
-    } catch (e) {
+    } catch (error) {
+      let message = 'Unknown Error'
+      if (error instanceof Error) message = error.message
+
       console.log('##############################################')
-      console.log(e)
+      console.log(message)
       console.log('##############################################')
-      await this.presentAlert(e);
+      await this.presentAlert(message);
     }
     this.processing = false
 

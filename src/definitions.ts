@@ -1,4 +1,4 @@
-export enum GLASSFY_ELEGGIBILITY {
+export enum GLASSFY_ELIGIBILITY {
   ELEGIBLE = 1,
   NON_ELEGIBLE = -1,
   UNKNOWN = 0,
@@ -60,8 +60,8 @@ export interface GlassfyVersion {
 export interface GlassfySku {
   readonly skuId: string;
   readonly productId: string;
-  readonly introductoryEligibility: GLASSFY_ELEGGIBILITY;
-  readonly promotionalEligibility: GLASSFY_ELEGGIBILITY;
+  readonly introductoryEligibility: GLASSFY_ELIGIBILITY;
+  readonly promotionalEligibility: GLASSFY_ELIGIBILITY;
   readonly extravars: { [key: string]: string };
 }
 
@@ -95,7 +95,6 @@ export interface GlassfyTransaction {
   readonly receiptValidated: boolean;
   readonly permissions: GlassfyPermissions;
 }
-
 
 export interface GlassfyPlugin {
   sdkVersion(): Promise<GlassfyVersion>;
@@ -133,8 +132,8 @@ export interface GlassfyPlugin {
 
   setDeviceToken(options: { token: string }): Promise<void>;
 
-  setExtraUserProperty(options: { extraProperty: [string: any] }): Promise<void>;
+  setExtraUserProperty(options: { extra: { [key: string]: any } }): Promise<void>;
 
-  getUserProperty(): Promise<void>;
+  getUserProperty(): Promise<{ extra: { [key: string]: any } }>;
 
 }
