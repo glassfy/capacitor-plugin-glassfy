@@ -1,4 +1,4 @@
-package io.glassfy.plugin.example;
+package io.ionic.starter;
 
 import com.getcapacitor.BridgeActivity;
 

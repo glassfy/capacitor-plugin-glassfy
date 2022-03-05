@@ -28,7 +28,8 @@
     "native"
   ],
   "scripts": {
-    "syncopen": "npm run build && cd example  && ionic capacitor sync ios && ionic capacitor open ios",
+    "syncopenios": "npm run build && cd example && npm install && ionic build && ionic capacitor sync ios && ionic capacitor open ios",
+    "syncopenandroid": "npm run build && cd example && npm install && ionic build && ionic capacitor sync android && ionic capacitor open android",
     "verify": "npm run verify:ios && npm run verify:android && npm run verify:web",
     "verify:ios": "cd ios && pod install && xcodebuild -workspace Plugin.xcworkspace -scheme Plugin && cd ..",
     "verify:android": "cd android && ./gradlew clean build test && cd ..",
