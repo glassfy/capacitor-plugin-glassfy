@@ -1,6 +1,6 @@
 {
   "name": "capacitor-plugin-glassfy",
-  "version": "1.1.82",
+  "version": "1.1.83",
   "description": "Glassfy Plugin",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",
@@ -77,5 +77,8 @@
     "android": {
       "src": "android"
     }
+  },
+  "dependencies": {
+    "@ionic/cli": "^6.19.0"
   }
 }
