@@ -11,7 +11,9 @@ public class GlassfyPlugin extends Plugin {
 
     @PluginMethod
     public void sdkVersion(PluginCall call) {
-        call.unimplemented();
+        JSObject ret = new JSObject();
+        ret.put("version", "versione_pippo");
+        call.resolve(ret);
     }
 
     @PluginMethod

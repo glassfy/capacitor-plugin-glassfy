@@ -1,6 +1,6 @@
 import { AfterViewInit, Component } from '@angular/core';
 import { AlertController } from '@ionic/angular';
-import { Glassfy, GlassfyOfferings, GlassfyOffering } from 'capacitor-plugin-glassfy';
+import { Glassfy, GlassfyPermission, GlassfyPermissions, GlassfyOffering } from 'capacitor-plugin-glassfy';
 
 @Component({
   selector: 'app-home',
@@ -19,7 +19,7 @@ export class HomePage implements AfterViewInit {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
       header: 'Alert',
-      message: message,
+      message,
       buttons: ['OK']
     });
 
@@ -31,52 +31,53 @@ export class HomePage implements AfterViewInit {
 
   async initializeGlassfy() {
     try {
-      const version = await Glassfy.sdkVersion()
+      const version = await Glassfy.sdkVersion();
       this.version = version.version;
 
-      await Glassfy.initialize({ apiKey: "my_api_key", watcherMode: false });
+      await Glassfy.initialize({ apiKey: '503c1afb6f473bbaf1ad0d5fb19b41', watcherMode: false });
 
-      await Glassfy.setExtraUserProperty({ extra: { "key1": "value1" } });
+      const permissions = await Glassfy.permissions();
+      console.log("Instalation id " + permissions.installationId)
+      permissions.all.forEach((permission: GlassfyPermission) => {
+        console.log(permission);
+      });
 
-      let extra = await Glassfy.getUserProperty();
-
-      console.log("Extra " + extra);
 
     } catch (error) {
-      let message = 'Unknown Error'
-      if (error instanceof Error) message = error.message
+      let message = 'Unknown Error';
+      if (error instanceof Error) { message = error.message; };
       await this.presentAlert(message);
 
     }
   }
 
   async purchaseGlassfy() {
-    this.processing = true
+    this.processing = true;
     try {
 
-      let offerings = await Glassfy.offerings()
+      const offerings = await Glassfy.offerings();
       offerings.all.forEach((offer: GlassfyOffering) => {
         console.log(offer);
       });
 
-      let sku = await Glassfy.skuWithId({ identifier: "weekly_magazine_subscription" })
-      console.log(sku)
+      const sku = await Glassfy.skuWithId({ identifier: 'weekly_magazine_subscription' });
+      console.log(sku);
 
-      let transaction = await Glassfy.purchaseSku({ sku: sku })
+      const transaction = await Glassfy.purchaseSku({ sku });
 
-      this.presentAlert(JSON.stringify(transaction))
+      this.presentAlert(JSON.stringify(transaction));
 
 
     } catch (error) {
-      let message = 'Unknown Error'
-      if (error instanceof Error) message = error.message
+      let message = 'Unknown Error';
+      if (error instanceof Error) { message = error.message; };
 
-      console.log('##############################################')
-      console.log(message)
-      console.log('##############################################')
+      console.log('##############################################');
+      console.log(message);
+      console.log('##############################################');
       await this.presentAlert(message);
     }
-    this.processing = false
+    this.processing = false;
 
   }
 
