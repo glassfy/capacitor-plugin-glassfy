@@ -1,6 +1,6 @@
 import { AfterViewInit, Component } from '@angular/core';
 import { AlertController } from '@ionic/angular';
-import { Glassfy, GlassfyOfferings, GlassfyOffering } from 'capacitor-plugin-glassfy';
+import { Glassfy, GlassfyPermission, GlassfyPermissions, GlassfyOffering } from 'capacitor-plugin-glassfy';
 
 @Component({
   selector: 'app-home',
@@ -34,7 +34,14 @@ export class HomePage implements AfterViewInit {
       const version = await Glassfy.sdkVersion();
       this.version = version.version;
 
-      // await Glassfy.initialize({ apiKey: 'my_api_key', watcherMode: false });
+      await Glassfy.initialize({ apiKey: '50af3c1afb6f473bbaf1ad0d5fb19b41', watcherMode: false });
+
+      const permissions = await Glassfy.permissions();
+      console.log("Instalation id " + permissions.installationId)
+      permissions.all.forEach((permission: GlassfyPermission) => {
+        console.log(permission);
+      });
+
 
       // // await Glassfy.setExtraUserProperty({ extra: { key1: 'value1' } });
 
