@@ -34,7 +34,7 @@ export class HomePage implements AfterViewInit {
       const version = await Glassfy.sdkVersion();
       this.version = version.version;
 
-      await Glassfy.initialize({ apiKey: '50af3c1afb6f473bbaf1ad0d5fb19b41', watcherMode: false });
+      await Glassfy.initialize({ apiKey: '503c1afb6f473bbaf1ad0d5fb19b41', watcherMode: false });
 
       const permissions = await Glassfy.permissions();
       console.log("Instalation id " + permissions.installationId)
@@ -42,12 +42,6 @@ export class HomePage implements AfterViewInit {
         console.log(permission);
       });
 
-
-      // // await Glassfy.setExtraUserProperty({ extra: { key1: 'value1' } });
-
-      // // const extra = await Glassfy.getUserProperty();
-
-      // console.log('Extra ' + extra);
 
     } catch (error) {
       let message = 'Unknown Error';
