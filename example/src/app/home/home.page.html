@@ -12,12 +12,6 @@
   </ion-header>
 
   <div id="container">
-    <ion-button
-      color="primary"
-      [disabled]="processing"
-      (click)="purchaseGlassfy()"
-      >Purchase SKU {{version}}</ion-button
-    >
     <ion-progress-bar
       [hidden]="!processing"
       type="indeterminate"

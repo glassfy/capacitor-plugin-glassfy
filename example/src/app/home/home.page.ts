@@ -78,35 +78,7 @@ export class HomePage implements AfterViewInit {
     }
   }
 
-  async purchaseGlassfy() {
-    this.processing = true;
-    try {
 
-      const offerings = await Glassfy.offerings();
-      offerings.all.forEach((offer: GlassfyOffering) => {
-        console.log(offer);
-      });
-
-      const sku = await Glassfy.skuWithId({ identifier: 'weekly_magazine_subscription' });
-      console.log(sku);
-
-      const transaction = await Glassfy.purchaseSku({ sku });
-
-      this.presentAlert(JSON.stringify(transaction));
-
-
-    } catch (error) {
-      let message = 'Unknown Error';
-      if (error instanceof Error) { message = error.message; };
-
-      console.log('##############################################');
-      console.log(message);
-      console.log('##############################################');
-      await this.presentAlert(message);
-    }
-    this.processing = false;
-
-  }
 
   ngAfterViewInit() {
     this.initializeGlassfy();
