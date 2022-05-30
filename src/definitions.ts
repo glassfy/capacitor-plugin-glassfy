@@ -1,21 +1,22 @@
-export enum GLASSFY_ELIGIBILITY {
+export enum GLASSFY_ELEGGIBILITY {
   ELEGIBLE = 1,
   NON_ELEGIBLE = -1,
   UNKNOWN = 0,
 }
 
-export enum GLASSFY_LOGFLAG {
-  FLAGERROR = 1 << 0,
-  FLAGDEBUG = 1 << 1,
-  FLAGINFO = 1 << 2
+
+export enum GLASSFY_STORE {
+  AppStore = 1,
+  PlayStore = 2,
+  Paddle = 3,
 }
 
-
 export enum GLASSFY_LOGLEVEL {
-  LOGLEVELOFF = 0,
-  LOGLEVELERROR = LOGLEVELOFF | GLASSFY_LOGFLAG.FLAGERROR,
-  LOGLEVELDEBUG = LOGLEVELERROR | GLASSFY_LOGFLAG.FLAGDEBUG,
-  LOGLEVELINFO = LOGLEVELDEBUG | GLASSFY_LOGFLAG.FLAGINFO,
+  OFF = 0,
+  ERROR = 1,
+  DEBUG = 2,
+  INFO = 3,
+  ALL = 3,
 }
 
 
@@ -57,11 +58,41 @@ export interface GlassfyVersion {
   readonly version: string;
 }
 
-export interface GlassfySku {
+export interface GlassfyProductDiscount {
+  readonly price: number;
+  readonly period: string;
+  readonly numberOfPeriods: number;
+  readonly type: string;
+}
+
+
+export interface GlassfyProduct {
+  readonly description: string;
+  readonly currencyCode: string;
+  readonly price: number;
+  readonly introductoryPrice: GlassfyProductDiscount;
+  readonly discounts: GlassfyProductDiscount[];
+}
+
+export interface GlassfySkuBase {
   readonly skuId: string;
   readonly productId: string;
-  readonly introductoryEligibility: GLASSFY_ELIGIBILITY;
-  readonly promotionalEligibility: GLASSFY_ELIGIBILITY;
+  readonly store: GLASSFY_STORE;
+}
+
+export interface GlassfySku extends GlassfySkuBase {
+  readonly introductoryEligibility: GLASSFY_ELEGGIBILITY;
+  readonly promotionalEligibility: GLASSFY_ELEGGIBILITY;
+  readonly extravars: { [key: string]: string };
+  readonly product: GlassfyProduct;
+}
+
+export interface GlassfySkuPaddle extends GlassfySkuBase {
+  readonly name: string;
+  readonly initialPrice: number;
+  readonly initialPriceCode: string;
+  readonly recurringPrice: number;
+  readonly recurringPriceCode: string;
   readonly extravars: { [key: string]: string };
 }
 
@@ -73,6 +104,7 @@ export interface GlassfyOffering {
 export interface GlassfyOfferings {
   readonly all: [GlassfyOffering];
 }
+
 export interface GlassfyPermission {
   readonly permissionId: string;
   readonly entitlement: GLASSFY_ENTITLEMENT;
@@ -96,6 +128,15 @@ export interface GlassfyTransaction {
   readonly permissions: GlassfyPermissions;
 }
 
+export interface GlassfyUserProperties {
+  readonly email: String;
+  readonly token: boolean;
+  readonly extra: GlassfyExtraProperty;
+}
+
+export type GlassfyExtraProperty = { [key: string]: string };
+
+
 export interface GlassfyPlugin {
   sdkVersion(): Promise<GlassfyVersion>;
 
@@ -104,36 +145,36 @@ export interface GlassfyPlugin {
  */
   initialize(options: { apiKey: string, watcherMode: boolean }): Promise<void>;
 
+  setLogLevel(options: { logLevel: GLASSFY_LOGLEVEL }): Promise<void>;
+
   /**
   *  For more details, check the documentation https://docs.glassfy.io/dashboard/configure-offerings
   */
   offerings(): Promise<GlassfyOfferings>;
 
   /**
+  *  For more details, check the documentation https://docs.glassfy.io/dashboard/configure-permissions.html
+  */
+  permissions(): Promise<GlassfyPermissions>;
+
+  /**
   *  For more details, check the documentation https://docs.glassfy.io/dashboard/configure-products
   */
   skuWithId(options: { identifier: string }): Promise<GlassfySku>;
+  skuWithIdAndStore(options: { identifier: string, store: GLASSFY_STORE }): Promise<GlassfySkuBase>;
 
-  login(options: { userid: string }): Promise<void>;
+  connectCustomSubscriber(options: { subscriberId: string }): Promise<GlassfySku>;
+  connectPaddleLicenseKey(options: { licenseKey: string, force: boolean }): Promise<void>;
 
-  logout(): Promise<void>;
+  setEmailUserProperty(options: { email: string }): Promise<void>;
 
-  /**
-  *  For more details, check the documentation https://docs.glassfy.io/dashboard/configure-permissions.html
-  */
+  setDeviceToken(options: { token: string }): Promise<void>;
 
-  permissions(): Promise<GlassfyPermissions>;
+  setExtraUserProperty(options: { extra: GlassfyExtraProperty }): Promise<void>;
+
+  getUserProperty(): Promise<GlassfyUserProperties>;
 
   purchaseSku(options: { sku: GlassfySku }): Promise<GlassfyTransaction>;
 
   restorePurchases(): Promise<GlassfyPermissions>;
-
-  setLogLevel(options: { logLevel: GLASSFY_LOGLEVEL }): Promise<void>;
-
-  setDeviceToken(options: { token: string }): Promise<void>;
-
-  setExtraUserProperty(options: { extra: { [key: string]: any } }): Promise<void>;
-
-  getUserProperty(): Promise<{ extra: { [key: string]: any } }>;
-
 }

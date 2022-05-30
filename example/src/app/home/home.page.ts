@@ -1,6 +1,6 @@
 import { AfterViewInit, Component } from '@angular/core';
 import { AlertController } from '@ionic/angular';
-import { Glassfy, GlassfyPermission, GlassfyPermissions, GlassfyOffering } from 'capacitor-plugin-glassfy';
+import { Glassfy, GlassfyPermission, GlassfyPermissions, GlassfyOffering, GlassfyExtraProperty } from 'capacitor-plugin-glassfy';
 
 @Component({
   selector: 'app-home',
@@ -34,14 +34,41 @@ export class HomePage implements AfterViewInit {
       const version = await Glassfy.sdkVersion();
       this.version = version.version;
 
-      await Glassfy.initialize({ apiKey: '503c1afb6f473bbaf1ad0d5fb19b41', watcherMode: false });
+      await Glassfy.initialize({ apiKey: '50af3c1afb6f473bbaf1ad0d5fb19b41', watcherMode: false });
 
-      const permissions = await Glassfy.permissions();
-      console.log("Instalation id " + permissions.installationId)
-      permissions.all.forEach((permission: GlassfyPermission) => {
-        console.log(permission);
-      });
+      // set custom identifier (optional)
+      await Glassfy.connectCustomSubscriber({ subscriberId: 'my_custom_identifier' });
 
+      // set user email (optional)
+      await Glassfy.setEmailUserProperty({ email: 'my@email.com' });
+
+      const extraProp: GlassfyExtraProperty = {
+        lastactivity: 'Bike',
+        usage_count: '3',
+      };
+
+      await Glassfy.setExtraUserProperty({ extra: extraProp });
+
+      //connect a paddle license key
+      await Glassfy.connectPaddleLicenseKey({ licenseKey: '89bf4c748e4a45e5829e6ee6', force: true });
+
+      // get subscriber current subscriptions
+      let permissions = await Glassfy.permissions();
+      console.log(JSON.stringify(permissions, null, 3));
+
+      // fetch 'subscription_articles' offering
+      let offerings = await Glassfy.offerings();
+      console.log(JSON.stringify(offerings, null, 3));
+
+      const offering = offerings.all.find(
+        (o) => o.offeringId === 'subscription_articles'
+      );
+
+      const sku = offering?.skus[0];
+      console.log(JSON.stringify(sku, null, 3));
+
+      let transaction = await Glassfy.purchaseSku({ sku: sku });
+      console.log(JSON.stringify(transaction, null, 3));
 
     } catch (error) {
       let message = 'Unknown Error';
