@@ -44,7 +44,7 @@ export class HomePage implements AfterViewInit {
 
       const extraProp: GlassfyExtraProperty = {
         lastactivity: 'Bike',
-        usage_count: '3',
+        usageCount: '3',
       };
 
       await Glassfy.setExtraUserProperty({ extra: extraProp });
@@ -53,11 +53,11 @@ export class HomePage implements AfterViewInit {
       await Glassfy.connectPaddleLicenseKey({ licenseKey: '89bf4c748e4a45e5829e6ee6', force: true });
 
       // get subscriber current subscriptions
-      let permissions = await Glassfy.permissions();
+      const permissions = await Glassfy.permissions();
       console.log(JSON.stringify(permissions, null, 3));
 
       // fetch 'subscription_articles' offering
-      let offerings = await Glassfy.offerings();
+      const offerings = await Glassfy.offerings();
       console.log(JSON.stringify(offerings, null, 3));
 
       const offering = offerings.all.find(
@@ -67,7 +67,7 @@ export class HomePage implements AfterViewInit {
       const sku = offering?.skus[0];
       console.log(JSON.stringify(sku, null, 3));
 
-      let transaction = await Glassfy.purchaseSku({ sku: sku });
+      const transaction = await Glassfy.purchaseSku({ sku: sku });
       console.log(JSON.stringify(transaction, null, 3));
 
     } catch (error) {
