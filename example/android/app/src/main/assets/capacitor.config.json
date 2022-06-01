@@ -1,5 +1,5 @@
 {
-	"appId": "io.ionic.starter",
+	"appId": "com.glassfy.androidexample",
 	"appName": "example",
 	"webDir": "www",
 	"bundledWebRuntime": false

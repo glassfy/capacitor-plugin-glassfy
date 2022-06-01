@@ -37,18 +37,21 @@ ionic capacitor open ios
 
 * [`sdkVersion()`](#sdkversion)
 * [`initialize(...)`](#initialize)
-* [`offerings()`](#offerings)
-* [`skuWithId(...)`](#skuwithid)
-* [`login(...)`](#login)
-* [`logout()`](#logout)
-* [`permissions()`](#permissions)
-* [`purchaseSku(...)`](#purchasesku)
-* [`restorePurchases()`](#restorepurchases)
 * [`setLogLevel(...)`](#setloglevel)
+* [`offerings()`](#offerings)
+* [`permissions()`](#permissions)
+* [`skuWithId(...)`](#skuwithid)
+* [`skuWithIdAndStore(...)`](#skuwithidandstore)
+* [`connectCustomSubscriber(...)`](#connectcustomsubscriber)
+* [`connectPaddleLicenseKey(...)`](#connectpaddlelicensekey)
+* [`setEmailUserProperty(...)`](#setemailuserproperty)
 * [`setDeviceToken(...)`](#setdevicetoken)
 * [`setExtraUserProperty(...)`](#setextrauserproperty)
 * [`getUserProperty()`](#getuserproperty)
+* [`purchaseSku(...)`](#purchasesku)
+* [`restorePurchases()`](#restorepurchases)
 * [Interfaces](#interfaces)
+* [Type Aliases](#type-aliases)
 * [Enums](#enums)
 
 </docgen-index>
@@ -82,6 +85,19 @@ For more details, follow instruction at https://docs.glassfy.io/get-started/conf
 --------------------
 
 
+### setLogLevel(...)
+
+```typescript
+setLogLevel(options: { logLevel: GLASSFY_LOGLEVEL; }) => Promise<void>
+```
+
+| Param         | Type                                                                         |
+| ------------- | ---------------------------------------------------------------------------- |
+| **`options`** | <code>{ logLevel: <a href="#glassfy_loglevel">GLASSFY_LOGLEVEL</a>; }</code> |
+
+--------------------
+
+
 ### offerings()
 
 ```typescript
@@ -91,6 +107,19 @@ offerings() => Promise<GlassfyOfferings>
 For more details, check the documentation https://docs.glassfy.io/dashboard/configure-offerings
 
 **Returns:** <code>Promise&lt;<a href="#glassfyofferings">GlassfyOfferings</a>&gt;</code>
+
+--------------------
+
+
+### permissions()
+
+```typescript
+permissions() => Promise<GlassfyPermissions>
+```
+
+For more details, check the documentation https://docs.glassfy.io/dashboard/configure-permissions.html
+
+**Returns:** <code>Promise&lt;<a href="#glassfypermissions">GlassfyPermissions</a>&gt;</code>
 
 --------------------
 
@@ -112,37 +141,95 @@ For more details, check the documentation https://docs.glassfy.io/dashboard/conf
 --------------------
 
 
-### login(...)
+### skuWithIdAndStore(...)
 
 ```typescript
-login(options: { userid: string; }) => Promise<void>
+skuWithIdAndStore(options: { identifier: string; store: GLASSFY_STORE; }) => Promise<GlassfySkuBase>
 ```
 
-| Param         | Type                             |
-| ------------- | -------------------------------- |
-| **`options`** | <code>{ userid: string; }</code> |
+| Param         | Type                                                                                    |
+| ------------- | --------------------------------------------------------------------------------------- |
+| **`options`** | <code>{ identifier: string; store: <a href="#glassfy_store">GLASSFY_STORE</a>; }</code> |
+
+**Returns:** <code>Promise&lt;<a href="#glassfyskubase">GlassfySkuBase</a>&gt;</code>
 
 --------------------
 
 
-### logout()
+### connectCustomSubscriber(...)
 
 ```typescript
-logout() => Promise<void>
+connectCustomSubscriber(options: { subscriberId: string; }) => Promise<GlassfySku>
 ```
+
+| Param         | Type                                   |
+| ------------- | -------------------------------------- |
+| **`options`** | <code>{ subscriberId: string; }</code> |
+
+**Returns:** <code>Promise&lt;<a href="#glassfysku">GlassfySku</a>&gt;</code>
 
 --------------------
 
 
-### permissions()
+### connectPaddleLicenseKey(...)
 
 ```typescript
-permissions() => Promise<GlassfyPermissions>
+connectPaddleLicenseKey(options: { licenseKey: string; force: boolean; }) => Promise<void>
 ```
 
-For more details, check the documentation https://docs.glassfy.io/dashboard/configure-permissions.html
+| Param         | Type                                                 |
+| ------------- | ---------------------------------------------------- |
+| **`options`** | <code>{ licenseKey: string; force: boolean; }</code> |
 
-**Returns:** <code>Promise&lt;<a href="#glassfypermissions">GlassfyPermissions</a>&gt;</code>
+--------------------
+
+
+### setEmailUserProperty(...)
+
+```typescript
+setEmailUserProperty(options: { email: string; }) => Promise<void>
+```
+
+| Param         | Type                            |
+| ------------- | ------------------------------- |
+| **`options`** | <code>{ email: string; }</code> |
+
+--------------------
+
+
+### setDeviceToken(...)
+
+```typescript
+setDeviceToken(options: { token: string; }) => Promise<void>
+```
+
+| Param         | Type                            |
+| ------------- | ------------------------------- |
+| **`options`** | <code>{ token: string; }</code> |
+
+--------------------
+
+
+### setExtraUserProperty(...)
+
+```typescript
+setExtraUserProperty(options: { extra: GlassfyExtraProperty; }) => Promise<void>
+```
+
+| Param         | Type                                                                              |
+| ------------- | --------------------------------------------------------------------------------- |
+| **`options`** | <code>{ extra: <a href="#glassfyextraproperty">GlassfyExtraProperty</a>; }</code> |
+
+--------------------
+
+
+### getUserProperty()
+
+```typescript
+getUserProperty() => Promise<GlassfyUserProperties>
+```
+
+**Returns:** <code>Promise&lt;<a href="#glassfyuserproperties">GlassfyUserProperties</a>&gt;</code>
 
 --------------------
 
@@ -169,56 +256,6 @@ restorePurchases() => Promise<GlassfyPermissions>
 ```
 
 **Returns:** <code>Promise&lt;<a href="#glassfypermissions">GlassfyPermissions</a>&gt;</code>
-
---------------------
-
-
-### setLogLevel(...)
-
-```typescript
-setLogLevel(options: { logLevel: GLASSFY_LOGLEVEL; }) => Promise<void>
-```
-
-| Param         | Type                                                                         |
-| ------------- | ---------------------------------------------------------------------------- |
-| **`options`** | <code>{ logLevel: <a href="#glassfy_loglevel">GLASSFY_LOGLEVEL</a>; }</code> |
-
---------------------
-
-
-### setDeviceToken(...)
-
-```typescript
-setDeviceToken(options: { token: string; }) => Promise<void>
-```
-
-| Param         | Type                            |
-| ------------- | ------------------------------- |
-| **`options`** | <code>{ token: string; }</code> |
-
---------------------
-
-
-### setExtraUserProperty(...)
-
-```typescript
-setExtraUserProperty(options: { extra: { [key: string]: any; }; }) => Promise<void>
-```
-
-| Param         | Type                                             |
-| ------------- | ------------------------------------------------ |
-| **`options`** | <code>{ extra: { [key: string]: any; }; }</code> |
-
---------------------
-
-
-### getUserProperty()
-
-```typescript
-getUserProperty() => Promise<{ extra: { [key: string]: any; }; }>
-```
-
-**Returns:** <code>Promise&lt;{ extra: { [key: string]: any; }; }&gt;</code>
 
 --------------------
 
@@ -250,13 +287,33 @@ getUserProperty() => Promise<{ extra: { [key: string]: any; }; }>
 
 #### GlassfySku
 
-| Prop                          | Type                                                                |
-| ----------------------------- | ------------------------------------------------------------------- |
-| **`skuId`**                   | <code>string</code>                                                 |
-| **`productId`**               | <code>string</code>                                                 |
-| **`introductoryEligibility`** | <code><a href="#glassfy_eligibility">GLASSFY_ELIGIBILITY</a></code> |
-| **`promotionalEligibility`**  | <code><a href="#glassfy_eligibility">GLASSFY_ELIGIBILITY</a></code> |
-| **`extravars`**               | <code>{ [key: string]: string; }</code>                             |
+| Prop                          | Type                                                                  |
+| ----------------------------- | --------------------------------------------------------------------- |
+| **`introductoryEligibility`** | <code><a href="#glassfy_eleggibility">GLASSFY_ELEGGIBILITY</a></code> |
+| **`promotionalEligibility`**  | <code><a href="#glassfy_eleggibility">GLASSFY_ELEGGIBILITY</a></code> |
+| **`extravars`**               | <code>{ [key: string]: string; }</code>                               |
+| **`product`**                 | <code><a href="#glassfyproduct">GlassfyProduct</a></code>             |
+
+
+#### GlassfyProduct
+
+| Prop                    | Type                                                                      |
+| ----------------------- | ------------------------------------------------------------------------- |
+| **`description`**       | <code>string</code>                                                       |
+| **`currencyCode`**      | <code>string</code>                                                       |
+| **`price`**             | <code>number</code>                                                       |
+| **`introductoryPrice`** | <code><a href="#glassfyproductdiscount">GlassfyProductDiscount</a></code> |
+| **`discounts`**         | <code>GlassfyProductDiscount[]</code>                                     |
+
+
+#### GlassfyProductDiscount
+
+| Prop                  | Type                |
+| --------------------- | ------------------- |
+| **`price`**           | <code>number</code> |
+| **`period`**          | <code>string</code> |
+| **`numberOfPeriods`** | <code>number</code> |
+| **`type`**            | <code>string</code> |
 
 
 #### GlassfyPermissions
@@ -281,6 +338,90 @@ getUserProperty() => Promise<{ extra: { [key: string]: any; }; }>
 | **`accountableSkus`** | <code>[string]</code>                                               |
 
 
+#### GlassfySkuBase
+
+| Prop            | Type                                                    |
+| --------------- | ------------------------------------------------------- |
+| **`skuId`**     | <code>string</code>                                     |
+| **`productId`** | <code>string</code>                                     |
+| **`store`**     | <code><a href="#glassfy_store">GLASSFY_STORE</a></code> |
+
+
+#### GlassfyUserProperties
+
+| Prop        | Type                                                                  |
+| ----------- | --------------------------------------------------------------------- |
+| **`email`** | <code><a href="#string">String</a></code>                             |
+| **`token`** | <code>boolean</code>                                                  |
+| **`extra`** | <code><a href="#glassfyextraproperty">GlassfyExtraProperty</a></code> |
+
+
+#### String
+
+Allows manipulation and formatting of text strings and determination and location of substrings within strings.
+
+| Prop         | Type                | Description                                                  |
+| ------------ | ------------------- | ------------------------------------------------------------ |
+| **`length`** | <code>number</code> | Returns the length of a <a href="#string">String</a> object. |
+
+| Method                | Signature                                                                                                                      | Description                                                                                                                                   |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| **toString**          | () =&gt; string                                                                                                                | Returns a string representation of a string.                                                                                                  |
+| **charAt**            | (pos: number) =&gt; string                                                                                                     | Returns the character at the specified index.                                                                                                 |
+| **charCodeAt**        | (index: number) =&gt; number                                                                                                   | Returns the Unicode value of the character at the specified location.                                                                         |
+| **concat**            | (...strings: string[]) =&gt; string                                                                                            | Returns a string that contains the concatenation of two or more strings.                                                                      |
+| **indexOf**           | (searchString: string, position?: number \| undefined) =&gt; number                                                            | Returns the position of the first occurrence of a substring.                                                                                  |
+| **lastIndexOf**       | (searchString: string, position?: number \| undefined) =&gt; number                                                            | Returns the last occurrence of a substring in the string.                                                                                     |
+| **localeCompare**     | (that: string) =&gt; number                                                                                                    | Determines whether two strings are equivalent in the current locale.                                                                          |
+| **match**             | (regexp: string \| <a href="#regexp">RegExp</a>) =&gt; <a href="#regexpmatcharray">RegExpMatchArray</a> \| null                | Matches a string with a regular expression, and returns an array containing the results of that search.                                       |
+| **replace**           | (searchValue: string \| <a href="#regexp">RegExp</a>, replaceValue: string) =&gt; string                                       | Replaces text in a string, using a regular expression or search string.                                                                       |
+| **replace**           | (searchValue: string \| <a href="#regexp">RegExp</a>, replacer: (substring: string, ...args: any[]) =&gt; string) =&gt; string | Replaces text in a string, using a regular expression or search string.                                                                       |
+| **search**            | (regexp: string \| <a href="#regexp">RegExp</a>) =&gt; number                                                                  | Finds the first substring match in a regular expression search.                                                                               |
+| **slice**             | (start?: number \| undefined, end?: number \| undefined) =&gt; string                                                          | Returns a section of a string.                                                                                                                |
+| **split**             | (separator: string \| <a href="#regexp">RegExp</a>, limit?: number \| undefined) =&gt; string[]                                | Split a string into substrings using the specified separator and return them as an array.                                                     |
+| **substring**         | (start: number, end?: number \| undefined) =&gt; string                                                                        | Returns the substring at the specified location within a <a href="#string">String</a> object.                                                 |
+| **toLowerCase**       | () =&gt; string                                                                                                                | Converts all the alphabetic characters in a string to lowercase.                                                                              |
+| **toLocaleLowerCase** | (locales?: string \| string[] \| undefined) =&gt; string                                                                       | Converts all alphabetic characters to lowercase, taking into account the host environment's current locale.                                   |
+| **toUpperCase**       | () =&gt; string                                                                                                                | Converts all the alphabetic characters in a string to uppercase.                                                                              |
+| **toLocaleUpperCase** | (locales?: string \| string[] \| undefined) =&gt; string                                                                       | Returns a string where all alphabetic characters have been converted to uppercase, taking into account the host environment's current locale. |
+| **trim**              | () =&gt; string                                                                                                                | Removes the leading and trailing white space and line terminator characters from a string.                                                    |
+| **substr**            | (from: number, length?: number \| undefined) =&gt; string                                                                      | Gets a substring beginning at the specified location and having the specified length.                                                         |
+| **valueOf**           | () =&gt; string                                                                                                                | Returns the primitive value of the specified object.                                                                                          |
+
+
+#### RegExpMatchArray
+
+| Prop        | Type                |
+| ----------- | ------------------- |
+| **`index`** | <code>number</code> |
+| **`input`** | <code>string</code> |
+
+
+#### RegExp
+
+| Prop             | Type                 | Description                                                                                                                                                          |
+| ---------------- | -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`source`**     | <code>string</code>  | Returns a copy of the text of the regular expression pattern. Read-only. The regExp argument is a Regular expression object. It can be a variable name or a literal. |
+| **`global`**     | <code>boolean</code> | Returns a Boolean value indicating the state of the global flag (g) used with a regular expression. Default is false. Read-only.                                     |
+| **`ignoreCase`** | <code>boolean</code> | Returns a Boolean value indicating the state of the ignoreCase flag (i) used with a regular expression. Default is false. Read-only.                                 |
+| **`multiline`**  | <code>boolean</code> | Returns a Boolean value indicating the state of the multiline flag (m) used with a regular expression. Default is false. Read-only.                                  |
+| **`lastIndex`**  | <code>number</code>  |                                                                                                                                                                      |
+
+| Method      | Signature                                                                     | Description                                                                                                                   |
+| ----------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| **exec**    | (string: string) =&gt; <a href="#regexpexecarray">RegExpExecArray</a> \| null | Executes a search on a string using a regular expression pattern, and returns an array containing the results of that search. |
+| **test**    | (string: string) =&gt; boolean                                                | Returns a Boolean value that indicates whether or not a pattern exists in a searched string.                                  |
+| **compile** | () =&gt; this                                                                 |                                                                                                                               |
+
+
+#### RegExpExecArray
+
+| Prop        | Type                |
+| ----------- | ------------------- |
+| **`index`** | <code>number</code> |
+| **`input`** | <code>string</code> |
+
+
 #### GlassfyTransaction
 
 | Prop                   | Type                                                              |
@@ -290,10 +431,29 @@ getUserProperty() => Promise<{ extra: { [key: string]: any; }; }>
 | **`permissions`**      | <code><a href="#glassfypermissions">GlassfyPermissions</a></code> |
 
 
+### Type Aliases
+
+
+#### GlassfyExtraProperty
+
+<code>{ [key: string]: string }</code>
+
+
 ### Enums
 
 
-#### GLASSFY_ELIGIBILITY
+#### GLASSFY_LOGLEVEL
+
+| Members     | Value          |
+| ----------- | -------------- |
+| **`OFF`**   | <code>0</code> |
+| **`ERROR`** | <code>1</code> |
+| **`DEBUG`** | <code>2</code> |
+| **`INFO`**  | <code>3</code> |
+| **`ALL`**   | <code>3</code> |
+
+
+#### GLASSFY_ELEGGIBILITY
 
 | Members            | Value           |
 | ------------------ | --------------- |
@@ -323,13 +483,12 @@ getUserProperty() => Promise<{ extra: { [key: string]: any; }; }>
 | **`AUTORENEWON`**          | <code>5</code>  |
 
 
-#### GLASSFY_LOGLEVEL
+#### GLASSFY_STORE
 
-| Members             | Value                                                   |
-| ------------------- | ------------------------------------------------------- |
-| **`LOGLEVELOFF`**   | <code>0</code>                                          |
-| **`LOGLEVELERROR`** | <code>LOGLEVELOFF \| GLASSFY_LOGFLAG.FLAGERROR</code>   |
-| **`LOGLEVELDEBUG`** | <code>LOGLEVELERROR \| GLASSFY_LOGFLAG.FLAGDEBUG</code> |
-| **`LOGLEVELINFO`**  | <code>LOGLEVELDEBUG \| GLASSFY_LOGFLAG.FLAGINFO</code>  |
+| Members         | Value          |
+| --------------- | -------------- |
+| **`AppStore`**  | <code>1</code> |
+| **`PlayStore`** | <code>2</code> |
+| **`Paddle`**    | <code>3</code> |
 
 </docgen-api>
