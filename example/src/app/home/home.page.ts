@@ -26,7 +26,7 @@ export class HomePage implements AfterViewInit {
     await alert.present();
 
     const { role } = await alert.onDidDismiss();
-    console.log('onDidDismiss resolved with role', role);
+    console.warn('onDidDismiss resolved with role', role);
   }
 
   async initializeGlassfy() {
@@ -54,21 +54,21 @@ export class HomePage implements AfterViewInit {
 
       // get subscriber current subscriptions
       const permissions = await Glassfy.permissions();
-      console.log(JSON.stringify(permissions, null, 3));
+      console.warn(JSON.stringify(permissions, null, 3));
 
       // fetch 'subscription_articles' offering
       const offerings = await Glassfy.offerings();
-      console.log(JSON.stringify(offerings, null, 3));
+      console.warn(JSON.stringify(offerings, null, 3));
 
       const offering = offerings.all.find(
         (o) => o.offeringId === 'subscription_articles'
       );
 
       const sku = offering?.skus[0];
-      console.log(JSON.stringify(sku, null, 3));
+      console.warn(JSON.stringify(sku, null, 3));
 
       const transaction = await Glassfy.purchaseSku({ sku: sku });
-      console.log(JSON.stringify(transaction, null, 3));
+      console.warn(JSON.stringify(transaction, null, 3));
 
     } catch (error) {
       let message = 'Unknown Error';
