@@ -1,8 +1,14 @@
 <img src="https://media.glassfy.io/banner_purple.png" />
 
+[![npm](https://img.shields.io/npm/v/capacitor-plugin-glassfy)](https://www.npmjs.com/package/capacitor-plugin-glassfy)
+
+> **Warning** <br/>
+> These plugin is for Capacitor 4. For Capacitor 3, use the 1.x version.
+
 ### CapacitorJS Glassfy Plugin
 
 [Glassfy](https://glassfy.io/) is a subscription revenue optimisation infrastructure for mobile applications.
+
 
 ### Getting Started
 
