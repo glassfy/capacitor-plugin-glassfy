@@ -280,7 +280,7 @@ restorePurchases() => Promise<GlassfyPermissions>
 
 | Prop      | Type                           |
 | --------- | ------------------------------ |
-| **`all`** | <code>[GlassfyOffering]</code> |
+| **`all`** | <code>GlassfyOffering[]</code> |
 
 
 #### GlassfyOffering
@@ -288,7 +288,7 @@ restorePurchases() => Promise<GlassfyPermissions>
 | Prop             | Type                      |
 | ---------------- | ------------------------- |
 | **`offeringId`** | <code>string</code>       |
-| **`skus`**       | <code>[GlassfySku]</code> |
+| **`skus`**       | <code>GlassfySku[]</code> |
 
 
 #### GlassfySku
@@ -330,7 +330,7 @@ restorePurchases() => Promise<GlassfyPermissions>
 | **`subscriberId`**               | <code>string</code>              |
 | **`originalApplicationVersion`** | <code>string</code>              |
 | **`originalApplicationDate`**    | <code>string</code>              |
-| **`all`**                        | <code>[GlassfyPermission]</code> |
+| **`all`**                        | <code>GlassfyPermission[]</code> |
 
 
 #### GlassfyPermission
@@ -341,7 +341,15 @@ restorePurchases() => Promise<GlassfyPermissions>
 | **`entitlement`**     | <code><a href="#glassfy_entitlement">GLASSFY_ENTITLEMENT</a></code> |
 | **`isValid`**         | <code>boolean</code>                                                |
 | **`expireDate`**      | <code>string</code>                                                 |
-| **`accountableSkus`** | <code>[string]</code>                                               |
+| **`accountableSkus`** | <code>GlassfyAccountableSku[]</code>                                |
+
+
+#### GlassfyAccountableSku
+
+| Prop                       | Type                 |
+| -------------------------- | -------------------- |
+| **`isInIntroOfferPeriod`** | <code>boolean</code> |
+| **`isInTrialPeriod`**      | <code>boolean</code> |
 
 
 #### GlassfySkuBase
