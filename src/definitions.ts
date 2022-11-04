@@ -59,7 +59,9 @@ export interface GlassfyVersion {
 }
 
 export interface GlassfyProductDiscount {
+  readonly identifier: string;
   readonly price: number;
+  readonly currencyCode: string;
   readonly period: string;
   readonly numberOfPeriods: number;
   readonly type: string;
@@ -67,9 +69,11 @@ export interface GlassfyProductDiscount {
 
 
 export interface GlassfyProduct {
+  readonly title: string;
+  readonly identifier: string;
   readonly description: string;
-  readonly currencyCode: string;
   readonly price: number;
+  readonly currencyCode: string;
   readonly introductoryPrice: GlassfyProductDiscount;
   readonly discounts: GlassfyProductDiscount[];
 }

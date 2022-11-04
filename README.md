@@ -305,9 +305,11 @@ restorePurchases() => Promise<GlassfyPermissions>
 
 | Prop                    | Type                                                                      |
 | ----------------------- | ------------------------------------------------------------------------- |
+| **`title`**             | <code>string</code>                                                       |
+| **`identifier`**        | <code>string</code>                                                       |
 | **`description`**       | <code>string</code>                                                       |
-| **`currencyCode`**      | <code>string</code>                                                       |
 | **`price`**             | <code>number</code>                                                       |
+| **`currencyCode`**      | <code>string</code>                                                       |
 | **`introductoryPrice`** | <code><a href="#glassfyproductdiscount">GlassfyProductDiscount</a></code> |
 | **`discounts`**         | <code>GlassfyProductDiscount[]</code>                                     |
 
@@ -316,7 +318,9 @@ restorePurchases() => Promise<GlassfyPermissions>
 
 | Prop                  | Type                |
 | --------------------- | ------------------- |
+| **`identifier`**      | <code>string</code> |
 | **`price`**           | <code>number</code> |
+| **`currencyCode`**    | <code>string</code> |
 | **`period`**          | <code>string</code> |
 | **`numberOfPeriods`** | <code>number</code> |
 | **`type`**            | <code>string</code> |
