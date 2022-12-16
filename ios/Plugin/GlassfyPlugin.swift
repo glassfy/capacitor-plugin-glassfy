@@ -160,4 +160,25 @@ public class GlassfyPlugin: CAPPlugin {
         GlassfyGlue.restorePurchases(completion: self.convertResponseFromGlassfyGlue(call));
     }
 
+    @objc func setAttribution(_ call: CAPPluginCall) {
+        guard let type = call.getInt("type") else {
+            call.reject("invalid/missing Type")
+            return
+        }
+        guard let value = call.getString("value") else {
+            call.reject("invalid/missing value")
+            return
+        }
+
+        GlassfyGlue.setAttributionType(NSNumber(integerLiteral: type), value:value, completion: self.convertResponseFromGlassfyGlue(call));
+    }
+    
+    @objc func setAttributions(_ call: CAPPluginCall) {
+        guard let items = call.getArray("items") else {
+            call.reject("invalid/missing items")
+            return
+        }
+
+        GlassfyGlue.setAttributions(items, completion:  self.convertResponseFromGlassfyGlue(call));
+    }
 }

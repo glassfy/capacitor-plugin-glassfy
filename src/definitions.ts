@@ -19,6 +19,16 @@ export enum GLASSFY_LOGLEVEL {
   ALL = 3,
 }
 
+export enum GLASSFY_ATTRIBUTION {
+  AdjustID = 1,
+  AppsFlyerID = 2,
+  IP = 3,
+  IDFA = 4,
+  IDFV = 5,
+  GAID = 6,
+  ASID = 7,
+  AID = 8
+}
 
 export enum GLASSFY_ENTITLEMENT {
   NEVERBUY = -9,
@@ -143,6 +153,12 @@ export interface GlassfyUserProperties {
   readonly extra: GlassfyExtraProperty;
 }
 
+export interface GlassfyAttributionItem {
+  readonly type: GLASSFY_ATTRIBUTION;
+  readonly value: string;
+}
+
+
 export type GlassfyExtraProperty = { [key: string]: string };
 
 
@@ -186,4 +202,9 @@ export interface GlassfyPlugin {
   purchaseSku(options: { sku: GlassfySku }): Promise<GlassfyTransaction>;
 
   restorePurchases(): Promise<GlassfyPermissions>;
+
+  setAttribution(options: { type: GLASSFY_ATTRIBUTION, value: string }): Promise<void>;
+
+  setAttributions(options: { items: GlassfyAttributionItem[] }): Promise<void>;
+
 }

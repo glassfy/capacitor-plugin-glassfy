@@ -18,4 +18,6 @@ CAP_PLUGIN(GlassfyPlugin, "Glassfy",
            CAP_PLUGIN_METHOD(setExtraUserProperty, CAPPluginReturnPromise);
            CAP_PLUGIN_METHOD(getUserProperty, CAPPluginReturnPromise);
            CAP_PLUGIN_METHOD(purchaseSku, CAPPluginReturnPromise);
-           CAP_PLUGIN_METHOD(restorePurchases, CAPPluginReturnPromise);)
+           CAP_PLUGIN_METHOD(restorePurchases, CAPPluginReturnPromise);
+           CAP_PLUGIN_METHOD(setAttribution, CAPPluginReturnPromise);
+           CAP_PLUGIN_METHOD(setAttributions, CAPPluginReturnPromise);)

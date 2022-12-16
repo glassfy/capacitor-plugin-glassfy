@@ -56,6 +56,8 @@ ionic capacitor open ios
 * [`getUserProperty()`](#getuserproperty)
 * [`purchaseSku(...)`](#purchasesku)
 * [`restorePurchases()`](#restorepurchases)
+* [`setAttribution(...)`](#setattribution)
+* [`setAttributions(...)`](#setattributions)
 * [Interfaces](#interfaces)
 * [Type Aliases](#type-aliases)
 * [Enums](#enums)
@@ -266,6 +268,32 @@ restorePurchases() => Promise<GlassfyPermissions>
 --------------------
 
 
+### setAttribution(...)
+
+```typescript
+setAttribution(options: { type: GLASSFY_ATTRIBUTION; value: string; }) => Promise<void>
+```
+
+| Param         | Type                                                                                          |
+| ------------- | --------------------------------------------------------------------------------------------- |
+| **`options`** | <code>{ type: <a href="#glassfy_attribution">GLASSFY_ATTRIBUTION</a>; value: string; }</code> |
+
+--------------------
+
+
+### setAttributions(...)
+
+```typescript
+setAttributions(options: { items: GlassfyAttributionItem[]; }) => Promise<void>
+```
+
+| Param         | Type                                              |
+| ------------- | ------------------------------------------------- |
+| **`options`** | <code>{ items: GlassfyAttributionItem[]; }</code> |
+
+--------------------
+
+
 ### Interfaces
 
 
@@ -449,6 +477,14 @@ Allows manipulation and formatting of text strings and determination and locatio
 | **`permissions`**      | <code><a href="#glassfypermissions">GlassfyPermissions</a></code> |
 
 
+#### GlassfyAttributionItem
+
+| Prop        | Type                                                                |
+| ----------- | ------------------------------------------------------------------- |
+| **`type`**  | <code><a href="#glassfy_attribution">GLASSFY_ATTRIBUTION</a></code> |
+| **`value`** | <code>string</code>                                                 |
+
+
 ### Type Aliases
 
 
@@ -508,5 +544,19 @@ Allows manipulation and formatting of text strings and determination and locatio
 | **`AppStore`**  | <code>1</code> |
 | **`PlayStore`** | <code>2</code> |
 | **`Paddle`**    | <code>3</code> |
+
+
+#### GLASSFY_ATTRIBUTION
+
+| Members           | Value          |
+| ----------------- | -------------- |
+| **`AdjustID`**    | <code>1</code> |
+| **`AppsFlyerID`** | <code>2</code> |
+| **`IP`**          | <code>3</code> |
+| **`IDFA`**        | <code>4</code> |
+| **`IDFV`**        | <code>5</code> |
+| **`GAID`**        | <code>6</code> |
+| **`ASID`**        | <code>7</code> |
+| **`AID`**         | <code>8</code> |
 
 </docgen-api>

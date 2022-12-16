@@ -236,4 +236,52 @@ class GlassfyPlugin : Plugin() {
     fun setDeviceToken(call: PluginCall) {
         call.resolve()
     }
+
+    @PluginMethod
+    fun setAttribution(call: PluginCall) {
+        val type = call.getInt("type")
+        if (type == null ) {
+            call.reject("invalid/missing parameter 'type'")
+            return
+        }
+        val value = call.getString("value")
+        if (value == null ) {
+            call.reject("invalid/missing parameter 'value'")
+            return
+        }
+
+        GlassfyGlue.setAttribution(type,value) { value, error ->
+            pluginCompletion(
+                call,
+                value,
+                error
+            )
+        }
+    }
+
+    @PluginMethod
+    fun setAttributions(call: PluginCall) {
+        val items = call.getArray("items")
+        if (items == null ) {
+            call.reject("invalid/missing parameter 'items'")
+            return
+        }
+
+        val listItems =  mutableListOf<Map<String,Any?>>()
+        for (i in 0 until items.length()) {
+            val item = items.getJSONObject(i).toMap()
+
+            listItems.add(item)
+        }
+
+        GlassfyGlue.setAttributions(listItems) { value, error ->
+            pluginCompletion(
+                call,
+                value,
+                error
+            )
+        }
+
+    }
+
 }
