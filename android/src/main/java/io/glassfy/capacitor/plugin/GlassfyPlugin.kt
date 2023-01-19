@@ -46,7 +46,6 @@ class GlassfyPlugin : Plugin() {
 
     @PluginMethod
     fun sdkVersion(call: PluginCall) {
-        val ret = JSObject()
         GlassfyGlue.sdkVersion { value, error -> pluginCompletion(call, value, error) }
     }
 
@@ -168,10 +167,7 @@ class GlassfyPlugin : Plugin() {
     @PluginMethod
     fun setExtraUserProperty( call: PluginCall) {
         var extra = call.getObject("extra").toMap()
-        if (extra == null ) {
-            call.reject("invalid parameter")
-            return
-        }
+
         val map = HashMap<String,String>()
         var validMap = true
         extra.forEach { (key, value) ->
@@ -204,25 +200,36 @@ class GlassfyPlugin : Plugin() {
     fun purchaseSku(call: PluginCall) {
         var sku = call.getObject("sku")
         if (sku == null ) {
-            call.reject("invalid parameter")
+            call.reject("missing sku parameter")
             return
         }
-        val activity = this.activity
+
         val skuId = sku.getString("skuId")
         if (skuId == null ) {
-            call.reject("invalid parameter")
+            call.reject("invalid sku object")
             return
         }
+
+        var skuToUpgrade = call.getObject("skuToUpgrade")
+        val skuToUpgradeId = skuToUpgrade.getString("skuId")
+
+        var prorationMode = call.getInt("prorationMode")
+        if (prorationMode == null  && skuToUpgradeId != null) {
+            prorationMode = 1
+        }
+
+        val activity = this.activity
+
         if (activity == null) {
             call.reject("Invalid Android Activity", "Invalid Android Activity")
             return
         }
 
-        GlassfyGlue.purchaseSku(activity, skuId) { value, error ->
+        GlassfyGlue.purchaseSku(activity,skuId,skuToUpgradeId,prorationMode) { value, error ->
             pluginCompletion(
-                call,
-                value,
-                error
+                    call,
+                    value,
+                    error
             )
         }
     }
@@ -244,13 +251,13 @@ class GlassfyPlugin : Plugin() {
             call.reject("invalid/missing parameter 'type'")
             return
         }
-        val value = call.getString("value")
-        if (value == null ) {
+        val attribValue = call.getString("value")
+        if (attribValue == null ) {
             call.reject("invalid/missing parameter 'value'")
             return
         }
 
-        GlassfyGlue.setAttribution(type,value) { value, error ->
+        GlassfyGlue.setAttribution(type,attribValue) { value, error ->
             pluginCompletion(
                 call,
                 value,

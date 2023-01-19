@@ -245,12 +245,12 @@ getUserProperty() => Promise<GlassfyUserProperties>
 ### purchaseSku(...)
 
 ```typescript
-purchaseSku(options: { sku: GlassfySku; }) => Promise<GlassfyTransaction>
+purchaseSku(options: { sku: GlassfySku; skuToUpgrade?: GlassfySku; prorationMode?: GLASSFY_PRORATION_MODE; }) => Promise<GlassfyTransaction>
 ```
 
-| Param         | Type                                                        |
-| ------------- | ----------------------------------------------------------- |
-| **`options`** | <code>{ sku: <a href="#glassfysku">GlassfySku</a>; }</code> |
+| Param         | Type                                                                                                                                                                                           |
+| ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`options`** | <code>{ sku: <a href="#glassfysku">GlassfySku</a>; skuToUpgrade?: <a href="#glassfysku">GlassfySku</a>; prorationMode?: <a href="#glassfy_proration_mode">GLASSFY_PRORATION_MODE</a>; }</code> |
 
 **Returns:** <code>Promise&lt;<a href="#glassfytransaction">GlassfyTransaction</a>&gt;</code>
 
@@ -544,6 +544,18 @@ Allows manipulation and formatting of text strings and determination and locatio
 | **`AppStore`**  | <code>1</code> |
 | **`PlayStore`** | <code>2</code> |
 | **`Paddle`**    | <code>3</code> |
+
+
+#### GLASSFY_PRORATION_MODE
+
+| Members                                             | Value          |
+| --------------------------------------------------- | -------------- |
+| **`UNKNOWN_SUBSCRIPTION_UPGRADE_DOWNGRADE_POLICY`** | <code>0</code> |
+| **`IMMEDIATE_WITH_TIME_PRORATION`**                 | <code>1</code> |
+| **`IMMEDIATE_AND_CHARGE_PRORATED_PRICE`**           | <code>2</code> |
+| **`IMMEDIATE_WITHOUT_PRORATION`**                   | <code>3</code> |
+| **`DEFERRED`**                                      | <code>4</code> |
+| **`IMMEDIATE_AND_CHARGE_FULL_PRICE`**               | <code>5</code> |
 
 
 #### GLASSFY_ATTRIBUTION

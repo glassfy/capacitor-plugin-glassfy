@@ -30,6 +30,15 @@ export enum GLASSFY_ATTRIBUTION {
   AID = 8
 }
 
+export enum GLASSFY_PRORATION_MODE {
+  UNKNOWN_SUBSCRIPTION_UPGRADE_DOWNGRADE_POLICY = 0,
+  IMMEDIATE_WITH_TIME_PRORATION = 1,
+  IMMEDIATE_AND_CHARGE_PRORATED_PRICE = 2,
+  IMMEDIATE_WITHOUT_PRORATION = 3,
+  DEFERRED = 4,
+  IMMEDIATE_AND_CHARGE_FULL_PRICE = 5
+}
+
 export enum GLASSFY_ENTITLEMENT {
   NEVERBUY = -9,
   // The customer received a refund for the subscription.
@@ -199,7 +208,7 @@ export interface GlassfyPlugin {
 
   getUserProperty(): Promise<GlassfyUserProperties>;
 
-  purchaseSku(options: { sku: GlassfySku }): Promise<GlassfyTransaction>;
+  purchaseSku(options: { sku: GlassfySku, skuToUpgrade?: GlassfySku, prorationMode?: GLASSFY_PRORATION_MODE }): Promise<GlassfyTransaction>;
 
   restorePurchases(): Promise<GlassfyPermissions>;
 
