@@ -1,6 +1,6 @@
 import { WebPlugin } from '@capacitor/core';
 
-import type { GlassfyPlugin, GlassfyVersion, GlassfyOfferings, GlassfySku, GlassfyPermissions, GLASSFY_PRORATION_MODE, GLASSFY_ATTRIBUTION, GlassfyAttributionItem, GLASSFY_LOGLEVEL, GlassfyTransaction, GlassfySkuBase, GLASSFY_STORE, GlassfyUserProperties } from './definitions';
+import type { GlassfyPlugin, GlassfyVersion, GlassfyOfferings, GlassfySku, GlassfyPermissions, GLASSFY_PRORATION_MODE, GLASSFY_ATTRIBUTION, GlassfyAttributionItem, GLASSFY_LOGLEVEL, GlassfyTransaction, GlassfySkuBase, GLASSFY_STORE, GlassfyUserProperties, GlassfyPurchasesHistory } from './definitions';
 
 export class GlassfyWeb extends WebPlugin implements GlassfyPlugin {
 
@@ -19,6 +19,10 @@ export class GlassfyWeb extends WebPlugin implements GlassfyPlugin {
   }
 
   async offerings(): Promise<GlassfyOfferings> {
+    throw this.unimplemented('Not supported on web.');
+  }
+
+  async purchaseHistory(): Promise<GlassfyPurchasesHistory> {
     throw this.unimplemented('Not supported on web.');
   }
 

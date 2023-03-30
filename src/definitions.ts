@@ -4,6 +4,21 @@ export enum GLASSFY_ELEGGIBILITY {
   UNKNOWN = 0,
 }
 
+export enum GLASSFY_EVENT_TYPE {
+  InitialBuy = 5001,
+  Restarted = 5002,
+  Renewed = 5003,
+  Expired = 5004,
+  DidChangeRenewalStatus = 5005,
+  IsInBillingRetryPeriod = 5006,
+  ProductChange = 5007,
+  InAppPurchase = 5008,
+  Refund = 5009,
+  Paused = 5010,
+  Resumed = 5011,
+  ConnectLicense = 5012,
+  DisconnectLicense = 5013
+}
 
 export enum GLASSFY_STORE {
   AppStore = 1,
@@ -133,6 +148,28 @@ export interface GlassfyOfferings {
   readonly all: GlassfyOffering[];
 }
 
+export interface GlassfyPurchasesHistory {
+  readonly all: GlassfyPurchaseHistory[];
+}
+
+export interface GlassfyPurchaseHistory {
+  readonly productId: string;
+  readonly skuId: string;
+  readonly type: GLASSFY_EVENT_TYPE
+  readonly store: GLASSFY_STORE;
+  readonly purchaseDate: string;
+  readonly expireDate: string;
+  readonly transactionId: string;
+  readonly subscriberId: string;
+  readonly currencyCode: string;
+  readonly countryCode: string;
+  readonly isInIntroOfferPeriod: boolean;
+  readonly promotionalOfferId: string;
+  readonly offerCodeRefName: string;
+  readonly licenseCode: string;
+  readonly webOrderLineItemId: string;
+}
+
 export interface GlassfyPermission {
   readonly permissionId: string;
   readonly entitlement: GLASSFY_ENTITLEMENT;
@@ -175,25 +212,30 @@ export interface GlassfyPlugin {
   sdkVersion(): Promise<GlassfyVersion>;
 
   /**
-  *  For more details, follow instruction at https://docs.glassfy.io/get-started/configuration
- */
+   *  For more details, follow instruction at https://docs.glassfy.io/get-started/configuration
+   */
   initialize(options: { apiKey: string, watcherMode: boolean }): Promise<void>;
 
   setLogLevel(options: { logLevel: GLASSFY_LOGLEVEL }): Promise<void>;
 
   /**
-  *  For more details, check the documentation https://docs.glassfy.io/dashboard/configure-offerings
-  */
+   *  For more details, check the documentation https://docs.glassfy.io/dashboard/configure-offerings
+   */
   offerings(): Promise<GlassfyOfferings>;
 
   /**
-  *  For more details, check the documentation https://docs.glassfy.io/dashboard/configure-permissions.html
-  */
+   * For more details, check the documentation https://docs.glassfy.io/dashboard/configure-offerings
+   */
+  purchaseHistory(): Promise<GlassfyPurchasesHistory>;
+
+  /**
+   * For more details, check the documentation https://docs.glassfy.io/dashboard/configure-permissions.html
+   */
   permissions(): Promise<GlassfyPermissions>;
 
   /**
-  *  For more details, check the documentation https://docs.glassfy.io/dashboard/configure-products
-  */
+   * For more details, check the documentation https://docs.glassfy.io/dashboard/configure-products
+   */
   skuWithId(options: { identifier: string }): Promise<GlassfySku>;
   skuWithIdAndStore(options: { identifier: string, store: GLASSFY_STORE }): Promise<GlassfySkuBase>;
 

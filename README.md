@@ -119,6 +119,17 @@ For more details, check the documentation https://docs.glassfy.io/dashboard/conf
 --------------------
 
 
+### purchaseHistory()
+
+```typescript
+purchaseHistory() => Promise<GlassfyPurchasesHistory>
+```
+
+**Returns:** <code>Promise&lt;<a href="#glassfypurchasehistory">GlassfyPurchasesHistory</a>&gt;</code>
+
+--------------------
+
+
 ### permissions()
 
 ```typescript

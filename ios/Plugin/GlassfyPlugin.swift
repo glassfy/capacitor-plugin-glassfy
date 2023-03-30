@@ -51,13 +51,15 @@ public class GlassfyPlugin: CAPPlugin {
     @objc func offerings(_ call: CAPPluginCall) {
         GlassfyGlue.offerings(completion: self.convertResponseFromGlassfyGlue(call))
     }
+
+    @objc func purchaseHistory(_ call: CAPPluginCall) {
+        GlassfyGlue.purchaseHistory(completion: self.convertResponseFromGlassfyGlue(call))
+    }
     
     @objc func permissions(_ call: CAPPluginCall) {
         GlassfyGlue.permissions(completion: self.convertResponseFromGlassfyGlue(call));
     }
     
-
-
     @objc func skuWithId(_ call: CAPPluginCall) {
         guard let identifier = call.getString("identifier") else {
             call.reject("invalid skuWithIdentifier parameters")

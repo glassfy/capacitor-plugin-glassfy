@@ -82,6 +82,11 @@ class GlassfyPlugin : Plugin() {
     }
 
     @PluginMethod
+    fun purchaseHistory(call: PluginCall) {
+        GlassfyGlue.purchaseHistory { value, error -> pluginCompletion(call, value, error) }
+    }
+
+    @PluginMethod
     fun permissions(call: PluginCall) {
         GlassfyGlue.permissions { value, error -> pluginCompletion(call, value, error) }
     }
