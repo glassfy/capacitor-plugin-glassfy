@@ -155,7 +155,7 @@ export interface GlassfyPurchasesHistory {
 export interface GlassfyPurchaseHistory {
   readonly productId: string;
   readonly skuId: string;
-  readonly type: GLASSFY_EVENT_TYPE
+  readonly type: GLASSFY_EVENT_TYPE;
   readonly store: GLASSFY_STORE;
   readonly purchaseDate: string;
   readonly expireDate: string;
