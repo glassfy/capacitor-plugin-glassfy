@@ -60,7 +60,9 @@ class GlassfyPlugin : Plugin() {
         GlassfyGlue.initialize(
             this.getContext(),
             apiKey,
-            watcherMode
+            watcherMode,
+            "capacitor",
+            "2.0.7"
         ) { value, error -> pluginCompletion(call, value, error) }
     }
 
@@ -79,6 +81,11 @@ class GlassfyPlugin : Plugin() {
     @PluginMethod
     fun offerings(call: PluginCall) {
         GlassfyGlue.offerings { value, error -> pluginCompletion(call, value, error) }
+    }
+
+    @PluginMethod
+    fun purchaseHistory(call: PluginCall) {
+        GlassfyGlue.purchaseHistory { value, error -> pluginCompletion(call, value, error) }
     }
 
     @PluginMethod

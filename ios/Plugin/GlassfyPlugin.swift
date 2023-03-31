@@ -35,7 +35,13 @@ public class GlassfyPlugin: CAPPlugin {
             call.reject("invalid initialize parameters")
             return
         }
-        GlassfyGlue.initialize(withApiKey: apiKey, watcherMode: watcherMode, withCompletion: self.convertResponseFromGlassfyGlue(call))
+        GlassfyGlue.initialize(
+            withApiKey: apiKey, 
+            watcherMode: watcherMode, 
+            crossPlatformSdkFramework: "capacitor",
+            crossPlatformSdkVersion: "2.0.7",
+            withCompletion: self.convertResponseFromGlassfyGlue(call)
+        )
     }
     
     @objc func setLogLevel(_ call: CAPPluginCall) {
@@ -51,13 +57,15 @@ public class GlassfyPlugin: CAPPlugin {
     @objc func offerings(_ call: CAPPluginCall) {
         GlassfyGlue.offerings(completion: self.convertResponseFromGlassfyGlue(call))
     }
+
+    @objc func purchaseHistory(_ call: CAPPluginCall) {
+        GlassfyGlue.purchaseHistory(completion: self.convertResponseFromGlassfyGlue(call))
+    }
     
     @objc func permissions(_ call: CAPPluginCall) {
         GlassfyGlue.permissions(completion: self.convertResponseFromGlassfyGlue(call));
     }
     
-
-
     @objc func skuWithId(_ call: CAPPluginCall) {
         guard let identifier = call.getString("identifier") else {
             call.reject("invalid skuWithIdentifier parameters")
