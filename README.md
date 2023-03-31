@@ -45,6 +45,7 @@ ionic capacitor open ios
 * [`initialize(...)`](#initialize)
 * [`setLogLevel(...)`](#setloglevel)
 * [`offerings()`](#offerings)
+* [`purchaseHistory()`](#purchasehistory)
 * [`permissions()`](#permissions)
 * [`skuWithId(...)`](#skuwithid)
 * [`skuWithIdAndStore(...)`](#skuwithidandstore)
@@ -125,7 +126,9 @@ For more details, check the documentation https://docs.glassfy.io/dashboard/conf
 purchaseHistory() => Promise<GlassfyPurchasesHistory>
 ```
 
-**Returns:** <code>Promise&lt;<a href="#glassfypurchasehistory">GlassfyPurchasesHistory</a>&gt;</code>
+For more details, check the documentation https://docs.glassfy.io/dashboard/configure-offerings
+
+**Returns:** <code>Promise&lt;<a href="#glassfypurchaseshistory">GlassfyPurchasesHistory</a>&gt;</code>
 
 --------------------
 
@@ -365,6 +368,34 @@ setAttributions(options: { items: GlassfyAttributionItem[]; }) => Promise<void>
 | **`type`**            | <code>string</code> |
 
 
+#### GlassfyPurchasesHistory
+
+| Prop      | Type                                  |
+| --------- | ------------------------------------- |
+| **`all`** | <code>GlassfyPurchaseHistory[]</code> |
+
+
+#### GlassfyPurchaseHistory
+
+| Prop                       | Type                                                              |
+| -------------------------- | ----------------------------------------------------------------- |
+| **`productId`**            | <code>string</code>                                               |
+| **`skuId`**                | <code>string</code>                                               |
+| **`type`**                 | <code><a href="#glassfy_event_type">GLASSFY_EVENT_TYPE</a></code> |
+| **`store`**                | <code><a href="#glassfy_store">GLASSFY_STORE</a></code>           |
+| **`purchaseDate`**         | <code>string</code>                                               |
+| **`expireDate`**           | <code>string</code>                                               |
+| **`transactionId`**        | <code>string</code>                                               |
+| **`subscriberId`**         | <code>string</code>                                               |
+| **`currencyCode`**         | <code>string</code>                                               |
+| **`countryCode`**          | <code>string</code>                                               |
+| **`isInIntroOfferPeriod`** | <code>boolean</code>                                              |
+| **`promotionalOfferId`**   | <code>string</code>                                               |
+| **`offerCodeRefName`**     | <code>string</code>                                               |
+| **`licenseCode`**          | <code>string</code>                                               |
+| **`webOrderLineItemId`**   | <code>string</code>                                               |
+
+
 #### GlassfyPermissions
 
 | Prop                             | Type                             |
@@ -527,6 +558,34 @@ Allows manipulation and formatting of text strings and determination and locatio
 | **`UNKNOWN`**      | <code>0</code>  |
 
 
+#### GLASSFY_EVENT_TYPE
+
+| Members                      | Value             |
+| ---------------------------- | ----------------- |
+| **`InitialBuy`**             | <code>5001</code> |
+| **`Restarted`**              | <code>5002</code> |
+| **`Renewed`**                | <code>5003</code> |
+| **`Expired`**                | <code>5004</code> |
+| **`DidChangeRenewalStatus`** | <code>5005</code> |
+| **`IsInBillingRetryPeriod`** | <code>5006</code> |
+| **`ProductChange`**          | <code>5007</code> |
+| **`InAppPurchase`**          | <code>5008</code> |
+| **`Refund`**                 | <code>5009</code> |
+| **`Paused`**                 | <code>5010</code> |
+| **`Resumed`**                | <code>5011</code> |
+| **`ConnectLicense`**         | <code>5012</code> |
+| **`DisconnectLicense`**      | <code>5013</code> |
+
+
+#### GLASSFY_STORE
+
+| Members         | Value          |
+| --------------- | -------------- |
+| **`AppStore`**  | <code>1</code> |
+| **`PlayStore`** | <code>2</code> |
+| **`Paddle`**    | <code>3</code> |
+
+
 #### GLASSFY_ENTITLEMENT
 
 | Members                    | Value           |
@@ -546,15 +605,6 @@ Allows manipulation and formatting of text strings and determination and locatio
 | **`NONRENEWING`**          | <code>3</code>  |
 | **`AUTORENEWOFF`**         | <code>4</code>  |
 | **`AUTORENEWON`**          | <code>5</code>  |
-
-
-#### GLASSFY_STORE
-
-| Members         | Value          |
-| --------------- | -------------- |
-| **`AppStore`**  | <code>1</code> |
-| **`PlayStore`** | <code>2</code> |
-| **`Paddle`**    | <code>3</code> |
 
 
 #### GLASSFY_PRORATION_MODE
