@@ -24,6 +24,8 @@ export enum GLASSFY_STORE {
   AppStore = 1,
   PlayStore = 2,
   Paddle = 3,
+  Stripe = 4,
+  Glassfy = 5
 }
 
 export enum GLASSFY_LOGLEVEL {
