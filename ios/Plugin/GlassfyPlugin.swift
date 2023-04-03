@@ -85,12 +85,11 @@ public class GlassfyPlugin: CAPPlugin {
         }
         let store:Glassfy.Store
         switch storecode {
-        case 1:
-            store = Glassfy.Store.appStore
-        case 2:
-            store = Glassfy.Store.playStore
-        case 3:
-            store = Glassfy.Store.paddle
+        case 1: store = Glassfy.Store.appStore
+        case 2: store = Glassfy.Store.playStore
+        case 3: store = Glassfy.Store.paddle
+        case 4: store = Glassfy.Store.stripe
+        case 5: store = Glassfy.Store.glassfy
         default:
             call.reject("invalid skuWithIdAndStore 'store' parameters")
             return

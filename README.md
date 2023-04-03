@@ -599,6 +599,8 @@ Allows manipulation and formatting of text strings and determination and locatio
 | **`AppStore`**  | <code>1</code> |
 | **`PlayStore`** | <code>2</code> |
 | **`Paddle`**    | <code>3</code> |
+| **`Stripe`**    | <code>4</code> |
+| **`Glassfy`**   | <code>5</code> |
 
 
 #### GLASSFY_ENTITLEMENT
