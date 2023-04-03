@@ -50,6 +50,11 @@ export class GlassfyWeb extends WebPlugin implements GlassfyPlugin {
     throw this.unimplemented('Not supported on web.');
   }
 
+  connectGlassfyUniversalCode(options: { universalCode: string, force: boolean }): Promise<void> {
+    console.log(options);
+    throw this.unimplemented('Not supported on web.');
+  }
+
   setEmailUserProperty(options: { email: string }): Promise<void> {
     console.log(options);
     throw this.unimplemented('Not supported on web.');

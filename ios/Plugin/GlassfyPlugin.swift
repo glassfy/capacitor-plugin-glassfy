@@ -110,15 +110,28 @@ public class GlassfyPlugin: CAPPlugin {
 
     @objc func connectPaddleLicenseKey(_ call: CAPPluginCall) {
         guard let licenseKey = call.getString("licenseKey") else {
-            call.reject("invalid licenseKey parameters")
+            call.reject("invalid licenseKey parameter")
             return
         }
         guard let force = call.getBool("force") else {
-            call.reject("invalid licenseKey parameters")
+            call.reject("invalid force parameter")
             return
         }
 
         GlassfyGlue.connectPaddleLicenseKey(licenseKey, force: force , completion: self.convertResponseFromGlassfyGlue(call));
+    }
+
+    @objc func connectGlassfyUniversalCode(_ call: CAPPluginCall) {
+        guard let universalCode = call.getString("universalCode") else {
+            call.reject("invalid universalCode parameter")
+            return
+        }
+        guard let force = call.getBool("force") else {
+            call.reject("invalid force parameter")
+            return
+        }
+
+        GlassfyGlue.connectGlassfyUniversalCode(universalCode, force: force , completion: self.convertResponseFromGlassfyGlue(call));
     }
     
     @objc func setEmailUserProperty(_ call: CAPPluginCall) {

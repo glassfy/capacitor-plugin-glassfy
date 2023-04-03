@@ -156,6 +156,24 @@ class GlassfyPlugin : Plugin() {
     }
 
     @PluginMethod
+    fun connectGlassfyUniversalCode(call: PluginCall) {
+        var universalCode = call.getString("universalCode")
+        var force = call.getBoolean("force")
+
+        if (universalCode == null || force == null ) {
+            call.reject("invalid universalCode parameter")
+            return
+        }
+        GlassfyGlue.connectGlassfyUniversalCode(universalCode, force) { value, error ->
+            pluginCompletion(
+                call,
+                value,
+                error
+            )
+        }
+    }
+
+    @PluginMethod
     fun setEmailUserProperty(call: PluginCall) {
         var email = call.getString("email")
         if (email == null ) {

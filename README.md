@@ -51,10 +51,12 @@ ionic capacitor open ios
 * [`skuWithIdAndStore(...)`](#skuwithidandstore)
 * [`connectCustomSubscriber(...)`](#connectcustomsubscriber)
 * [`connectPaddleLicenseKey(...)`](#connectpaddlelicensekey)
+* [`connectGlassfyUniversalCode(...)`](#connectglassfyuniversalcode)
 * [`setEmailUserProperty(...)`](#setemailuserproperty)
 * [`setDeviceToken(...)`](#setdevicetoken)
 * [`setExtraUserProperty(...)`](#setextrauserproperty)
 * [`getUserProperty()`](#getuserproperty)
+* [`purchaseHistory()`](#purchasehistory)
 * [`purchaseSku(...)`](#purchasesku)
 * [`restorePurchases()`](#restorepurchases)
 * [`setAttribution(...)`](#setattribution)
@@ -202,6 +204,19 @@ connectPaddleLicenseKey(options: { licenseKey: string; force: boolean; }) => Pro
 | Param         | Type                                                 |
 | ------------- | ---------------------------------------------------- |
 | **`options`** | <code>{ licenseKey: string; force: boolean; }</code> |
+
+--------------------
+
+
+### connectGlassfyUniversalCode(...)
+
+```typescript
+connectGlassfyUniversalCode(options: { universalCode: string; force: boolean; }) => Promise<void>
+```
+
+| Param         | Type                                                 |
+| ------------- | ---------------------------------------------------- |
+| **`options`** | <code>{ universalCode: string; force: boolean; }</code> |
 
 --------------------
 
