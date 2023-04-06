@@ -39,7 +39,7 @@ public class GlassfyPlugin: CAPPlugin {
             withApiKey: apiKey, 
             watcherMode: watcherMode, 
             crossPlatformSdkFramework: "capacitor",
-            crossPlatformSdkVersion: "2.0.7",
+            crossPlatformSdkVersion: "2.0.8",
             withCompletion: self.convertResponseFromGlassfyGlue(call)
         )
     }
@@ -85,12 +85,11 @@ public class GlassfyPlugin: CAPPlugin {
         }
         let store:Glassfy.Store
         switch storecode {
-        case 1:
-            store = Glassfy.Store.appStore
-        case 2:
-            store = Glassfy.Store.playStore
-        case 3:
-            store = Glassfy.Store.paddle
+        case 1: store = Glassfy.Store.appStore
+        case 2: store = Glassfy.Store.playStore
+        case 3: store = Glassfy.Store.paddle
+        case 4: store = Glassfy.Store.stripe
+        case 5: store = Glassfy.Store.glassfy
         default:
             call.reject("invalid skuWithIdAndStore 'store' parameters")
             return
@@ -110,15 +109,28 @@ public class GlassfyPlugin: CAPPlugin {
 
     @objc func connectPaddleLicenseKey(_ call: CAPPluginCall) {
         guard let licenseKey = call.getString("licenseKey") else {
-            call.reject("invalid licenseKey parameters")
+            call.reject("invalid licenseKey parameter")
             return
         }
         guard let force = call.getBool("force") else {
-            call.reject("invalid licenseKey parameters")
+            call.reject("invalid force parameter")
             return
         }
 
         GlassfyGlue.connectPaddleLicenseKey(licenseKey, force: force , completion: self.convertResponseFromGlassfyGlue(call));
+    }
+
+    @objc func connectGlassfyUniversalCode(_ call: CAPPluginCall) {
+        guard let universalCode = call.getString("universalCode") else {
+            call.reject("invalid universalCode parameter")
+            return
+        }
+        guard let force = call.getBool("force") else {
+            call.reject("invalid force parameter")
+            return
+        }
+
+        GlassfyGlue.connectGlassfyUniversalCode(universalCode, force: force , completion: self.convertResponseFromGlassfyGlue(call));
     }
     
     @objc func setEmailUserProperty(_ call: CAPPluginCall) {

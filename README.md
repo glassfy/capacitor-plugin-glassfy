@@ -51,10 +51,12 @@ ionic capacitor open ios
 * [`skuWithIdAndStore(...)`](#skuwithidandstore)
 * [`connectCustomSubscriber(...)`](#connectcustomsubscriber)
 * [`connectPaddleLicenseKey(...)`](#connectpaddlelicensekey)
+* [`connectGlassfyUniversalCode(...)`](#connectglassfyuniversalcode)
 * [`setEmailUserProperty(...)`](#setemailuserproperty)
 * [`setDeviceToken(...)`](#setdevicetoken)
 * [`setExtraUserProperty(...)`](#setextrauserproperty)
 * [`getUserProperty()`](#getuserproperty)
+* [`purchaseHistory()`](#purchasehistory)
 * [`purchaseSku(...)`](#purchasesku)
 * [`restorePurchases()`](#restorepurchases)
 * [`setAttribution(...)`](#setattribution)
@@ -202,6 +204,19 @@ connectPaddleLicenseKey(options: { licenseKey: string; force: boolean; }) => Pro
 | Param         | Type                                                 |
 | ------------- | ---------------------------------------------------- |
 | **`options`** | <code>{ licenseKey: string; force: boolean; }</code> |
+
+--------------------
+
+
+### connectGlassfyUniversalCode(...)
+
+```typescript
+connectGlassfyUniversalCode(options: { universalCode: string; force: boolean; }) => Promise<void>
+```
+
+| Param         | Type                                                 |
+| ------------- | ---------------------------------------------------- |
+| **`options`** | <code>{ universalCode: string; force: boolean; }</code> |
 
 --------------------
 
@@ -584,6 +599,8 @@ Allows manipulation and formatting of text strings and determination and locatio
 | **`AppStore`**  | <code>1</code> |
 | **`PlayStore`** | <code>2</code> |
 | **`Paddle`**    | <code>3</code> |
+| **`Stripe`**    | <code>4</code> |
+| **`Glassfy`**   | <code>5</code> |
 
 
 #### GLASSFY_ENTITLEMENT
