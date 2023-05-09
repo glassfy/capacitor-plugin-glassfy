@@ -16,6 +16,7 @@ CAP_PLUGIN(
     CAP_PLUGIN_METHOD(skuWithIdAndStore, CAPPluginReturnPromise);
     CAP_PLUGIN_METHOD(connectCustomSubscriber, CAPPluginReturnPromise);
     CAP_PLUGIN_METHOD(connectPaddleLicenseKey, CAPPluginReturnPromise);
+    CAP_PLUGIN_METHOD(connectGlassfyUniversalCode, CAPPluginReturnPromise);
     CAP_PLUGIN_METHOD(setEmailUserProperty, CAPPluginReturnPromise);
     CAP_PLUGIN_METHOD(setDeviceToken, CAPPluginReturnPromise);
     CAP_PLUGIN_METHOD(setExtraUserProperty, CAPPluginReturnPromise);

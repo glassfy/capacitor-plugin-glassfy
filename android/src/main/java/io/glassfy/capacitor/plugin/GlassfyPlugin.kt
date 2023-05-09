@@ -62,7 +62,7 @@ class GlassfyPlugin : Plugin() {
             apiKey,
             watcherMode,
             "capacitor",
-            "2.1.0"
+            "3.0.0"
         ) { value, error -> pluginCompletion(call, value, error) }
     }
 
@@ -147,6 +147,24 @@ class GlassfyPlugin : Plugin() {
             return
         }
         GlassfyGlue.connectPaddleLicenseKey(licenseKey, force) { value, error ->
+            pluginCompletion(
+                call,
+                value,
+                error
+            )
+        }
+    }
+
+    @PluginMethod
+    fun connectGlassfyUniversalCode(call: PluginCall) {
+        var universalCode = call.getString("universalCode")
+        var force = call.getBoolean("force")
+
+        if (universalCode == null || force == null ) {
+            call.reject("invalid universalCode parameter")
+            return
+        }
+        GlassfyGlue.connectGlassfyUniversalCode(universalCode, force) { value, error ->
             pluginCompletion(
                 call,
                 value,
