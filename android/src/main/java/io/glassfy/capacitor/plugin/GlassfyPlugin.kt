@@ -62,7 +62,7 @@ class GlassfyPlugin : Plugin() {
             apiKey,
             watcherMode,
             "capacitor",
-            "3.0.0"
+            "3.0.0-beta.0"
         ) { value, error -> pluginCompletion(call, value, error) }
     }
 
