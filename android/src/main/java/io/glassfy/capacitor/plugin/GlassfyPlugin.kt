@@ -218,7 +218,7 @@ class GlassfyPlugin : Plugin() {
         }
 
         var skuToUpgrade = call.getObject("skuToUpgrade")
-        val skuToUpgradeId = skuToUpgrade.getString("skuId")
+        val skuToUpgradeId = if (skuToUpgrade != null) skuToUpgrade.getString("skuId") else null
 
         var prorationMode = call.getInt("prorationMode")
         if (prorationMode == null  && skuToUpgradeId != null) {
