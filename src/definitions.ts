@@ -87,7 +87,6 @@ export enum GLASSFY_ENTITLEMENT {
   AUTORENEWOFF = 4,
   // The subscription is active and auto-renew is on.
   AUTORENEWON = 5,
-
 }
 
 export interface GlassfyVersion {
@@ -264,4 +263,9 @@ export interface GlassfyPlugin {
 
   setAttributions(options: { items: GlassfyAttributionItem[] }): Promise<void>;
 
+  _paywall(options: { remoteConfig: String }): Promise<void>;
+
+  _closePaywall(): Promise<void>;
+
+  _openUrl(options: { url: String }): Promise<void>;
 }

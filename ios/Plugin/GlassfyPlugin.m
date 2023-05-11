@@ -25,4 +25,5 @@ CAP_PLUGIN(
     CAP_PLUGIN_METHOD(restorePurchases, CAPPluginReturnPromise);
     CAP_PLUGIN_METHOD(setAttribution, CAPPluginReturnPromise);
     CAP_PLUGIN_METHOD(setAttributions, CAPPluginReturnPromise);
+    CAP_PLUGIN_METHOD(paywall, CAPPluginReturnPromise);
 )

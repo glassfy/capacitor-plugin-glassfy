@@ -79,6 +79,7 @@
     }
   },
   "dependencies": {
+    "@capacitor/browser": "^5.0.2",
     "@ionic/cli": "^6.19.0"
   }
 }

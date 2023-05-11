@@ -2,10 +2,6 @@ import Capacitor
 import Foundation
 import GlassfyGlue
 
-/**
- * Please read the Capacitor iOS Plugin Development Guide
- * here: https://capacitorjs.com/docs/plugins/ios
- */
 @objc(GlassfyPlugin)
 public class GlassfyPlugin: CAPPlugin {
     
@@ -21,8 +17,7 @@ public class GlassfyPlugin: CAPPlugin {
                 call.resolve()
             }
         }
-    }
-    
+    }    
     
     @objc func sdkVersion(_ call: CAPPluginCall) {
         GlassfyGlue.sdkVersion (completion: self.convertResponseFromGlassfyGlue(call));
@@ -93,11 +88,9 @@ public class GlassfyPlugin: CAPPlugin {
         default:
             call.reject("invalid skuWithIdAndStore 'store' parameters")
             return
-        }
-        
+        }        
         GlassfyGlue.sku(withId: identifier, store: store, completion: self.convertResponseFromGlassfyGlue(call));
     }
-    
     
     @objc func connectCustomSubscriber(_ call: CAPPluginCall) {
         guard let subscriberId = call.getString("subscriberId") else {
@@ -116,7 +109,6 @@ public class GlassfyPlugin: CAPPlugin {
             call.reject("invalid force parameter")
             return
         }
-
         GlassfyGlue.connectPaddleLicenseKey(licenseKey, force: force , completion: self.convertResponseFromGlassfyGlue(call));
     }
 
@@ -129,7 +121,6 @@ public class GlassfyPlugin: CAPPlugin {
             call.reject("invalid force parameter")
             return
         }
-
         GlassfyGlue.connectGlassfyUniversalCode(universalCode, force: force , completion: self.convertResponseFromGlassfyGlue(call));
     }
     
@@ -138,7 +129,6 @@ public class GlassfyPlugin: CAPPlugin {
             call.reject("invalid email parameters")
             return
         }
-
         GlassfyGlue.setEmailUserProperty(email, withCompletion: self.convertResponseFromGlassfyGlue(call));
     }
     
@@ -147,7 +137,6 @@ public class GlassfyPlugin: CAPPlugin {
             call.reject("invalid setDeviceToken parameters")
             return
         }
-        
         GlassfyGlue.setDeviceToken(token, withCompletion: self.convertResponseFromGlassfyGlue(call));
     }
 
@@ -156,23 +145,18 @@ public class GlassfyPlugin: CAPPlugin {
             call.reject("invalid setDeviceToken parameters")
             return
         }
-        
         GlassfyGlue.setExtraUserProperty(extra, withCompletion: self.convertResponseFromGlassfyGlue(call));
     }
 
-    @objc func getUserProperty(_ call: CAPPluginCall) {
-        
-        GlassfyGlue.getExtraUserProperty(completion: self.convertResponseFromGlassfyGlue(call));
-        
+    @objc func getUserProperty(_ call: CAPPluginCall) {        
+        GlassfyGlue.getExtraUserProperty(completion: self.convertResponseFromGlassfyGlue(call));        
     }
-
 
     @objc func purchaseSku(_ call: CAPPluginCall) {
         guard let sku = call.getObject("sku") else {
             call.reject("Invalid SKU")
             return
-        }
-                
+        }                
         GlassfyGlue.purchaseSku(sku, withCompletion: self.convertResponseFromGlassfyGlue(call));
     }
     
@@ -189,7 +173,6 @@ public class GlassfyPlugin: CAPPlugin {
             call.reject("invalid/missing value")
             return
         }
-
         GlassfyGlue.setAttributionType(NSNumber(integerLiteral: type), value:value, completion: self.convertResponseFromGlassfyGlue(call));
     }
     
@@ -198,7 +181,19 @@ public class GlassfyPlugin: CAPPlugin {
             call.reject("invalid/missing items")
             return
         }
-
-        GlassfyGlue.setAttributions(items, completion:  self.convertResponseFromGlassfyGlue(call));
+        GlassfyGlue.setAttributions(items, completion: self.convertResponseFromGlassfyGlue(call));
+    }
+    
+    @objc func _paywall(_ call: CAPPluginCall) {
+        guard let remoteConfig = call.getString("remoteConfig") else {
+            call.reject("invalid/missing remoteConfig")
+            return
+        }
+        call.reject("Not implemented")
+        // GlassfyGlue.paywall(withId: remoteConfig, completion: self.convertResponseFromGlassfyGlue(call));
+    }
+    
+    @objc func _close(_ call: CAPPluginCall) {
+        call.reject("Not implemented")
     }
 }
