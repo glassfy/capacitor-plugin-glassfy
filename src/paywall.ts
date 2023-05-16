@@ -2,10 +2,8 @@ import { GlassfySku, GlassfyTransaction } from "./definitions";
 import { Glassfy } from "./index";
 
 export class GlassfyPaywall {
-    public static async paywall(options: { remoteConfig: String, listener: PaywallListener | null }) {
-        if (options.listener) {
-            GlassfyPaywall.setupListener(options.listener);
-        }
+    public static async paywall(options: { remoteConfig: String, listener: PaywallListener | null }) {        
+        GlassfyPaywall.setupListener(options.listener ?? {});
         await Glassfy._paywall({ remoteConfig: options.remoteConfig });
     }
 

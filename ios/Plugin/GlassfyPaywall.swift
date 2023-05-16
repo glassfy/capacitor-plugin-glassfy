@@ -35,7 +35,6 @@ class CapacitorPaywallListener: PaywallListener {
     }
     
     func onClose(transaction: Glassfy.Transaction?, error: Error?) {
-        print("CapacitorPaywallListener onClose")
         var payload: [String: Any] = [
             "event": "onClose"
         ]
@@ -49,7 +48,6 @@ class CapacitorPaywallListener: PaywallListener {
     }
     
     func onLink(url: URL) {
-        print("CapacitorPaywallListener onLink")
         let payload: [String: Any] = [
             "event": "onLink",
             "url": url.absoluteString
@@ -58,7 +56,6 @@ class CapacitorPaywallListener: PaywallListener {
     }
     
     func onRestore() {
-        print("CapacitorPaywallListener onRestore")
         let payload: [String: Any] = [
             "event": "onRestore"
         ]
@@ -66,7 +63,6 @@ class CapacitorPaywallListener: PaywallListener {
     }
     
     func onPurchase(sku: Glassfy.Sku) {
-        print("CapacitorPaywallListener onPurchase")
         var payload: [String: Any] = [
             "event": "onPurchase"
         ]
