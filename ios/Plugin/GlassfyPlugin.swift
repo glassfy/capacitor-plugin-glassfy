@@ -1,17 +1,20 @@
 import Capacitor
 import Foundation
+import Glassfy
 import GlassfyGlue
 
 @objc(GlassfyPlugin)
 public class GlassfyPlugin: CAPPlugin {
+    private weak var paywallViewController: UIViewController?
+    private var paywallListener: PaywallListener?
     
-    func convertResponseFromGlassfyGlue(_ call: CAPPluginCall) -> (Dictionary<String,Any>?,Error?) -> Void {
-        return {value,error in
-            if let error = error {
+    func convertResponseFromGlassfyGlue(_ call: CAPPluginCall) -> ([String: Any]?, Error?) -> Void {
+        return { value, error in
+            if let error {
                 call.reject(error.localizedDescription)
                 return
             }
-            if let value = value {
+            if let value {
                 call.resolve(value)
             } else {
                 call.resolve()
@@ -186,14 +189,52 @@ public class GlassfyPlugin: CAPPlugin {
     
     @objc func _paywall(_ call: CAPPluginCall) {
         guard let remoteConfig = call.getString("remoteConfig") else {
-            call.reject("invalid/missing remoteConfig")
+            call.reject("Invalid/missing remoteConfig")
             return
         }
-        call.reject("Not implemented")
-        // GlassfyGlue.paywall(withId: remoteConfig, completion: self.convertResponseFromGlassfyGlue(call));
+        guard paywallViewController == nil else {
+            call.reject("Can only show one paywall at a time, please call `GlassfyPaywall.close()`")
+            return
+        }
+        Task {
+            await showPaywall(id: remoteConfig, then: call)
+        }
     }
     
-    @objc func _close(_ call: CAPPluginCall) {
-        call.reject("Not implemented")
+    private func showPaywall(id remoteConfig: String, then call: CAPPluginCall) async {
+        do {
+            let paywall = try await Glassfy.paywall(id: remoteConfig)
+            let viewController = try await paywall.loadViewController()
+            let listener = CapacitorPaywallListener { self.notifyListeners($0, data: $1) }
+            
+            self.paywallViewController = viewController
+            self.paywallListener = listener
+            
+            Task { @MainActor in
+                viewController.install(listener)
+                bridge?.viewController?.present(viewController, animated: true)                
+                call.resolve(["result": "sucess"])
+            }
+        } catch {
+            call.reject("Failed to show paywall, \(error)")
+        }
+    }
+    
+    @objc func _closePaywall(_ call: CAPPluginCall) {
+        Task { @MainActor in
+            paywallViewController?.dismiss(animated: true)
+            paywallViewController = nil
+            paywallListener = nil
+            call.resolve(["result": "sucess"])
+        }
+    }
+    
+    @objc func _openUrl(_ call: CAPPluginCall) {
+        guard let urlString = call.getString("url"), let url = URL(string: urlString) else {
+            call.reject("Invalid/missing url")
+            return
+        }
+        UIApplication.shared.open(url)
+        call.resolve(["result": "sucess"])
     }
 }

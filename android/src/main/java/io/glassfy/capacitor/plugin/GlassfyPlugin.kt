@@ -27,7 +27,7 @@ class GlassfyPlugin : Plugin() {
             }
             is JSONObject -> value.toMap()
             JSONObject.NULL -> null
-            else            -> value
+            else -> value
         }
     }
 
