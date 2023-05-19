@@ -1,14 +1,23 @@
 import { GlassfySku, GlassfyTransaction } from "./definitions";
 import { Glassfy } from "./index";
 
+const paywallEvent = 'paywallEvent';
+
 export class GlassfyPaywall {
-    public static async paywall(options: { remoteConfig: String, listener: PaywallListener | null }) {        
+    private static currentListener: any = null
+
+    public static async paywall(options: { remoteConfig: String, listener: PaywallListener | null }) { 
+        GlassfyPaywall.removeAllListeners();       
         GlassfyPaywall.setupListener(options.listener ?? {});
         await Glassfy._paywall({ remoteConfig: options.remoteConfig });
     }
 
+    private static async removeAllListeners() {
+        GlassfyPaywall.currentListener?.remove();
+    }
+
     private static async setupListener(listener: PaywallListener) {        
-        (Glassfy as any).addListener('paywallEvent', async (event: any) => {
+        const handler = async (event: any) => {
             const eventName: string = event.event;
 
             const close = (transaction: GlassfyTransaction | null, error: any | null) => {
@@ -61,11 +70,12 @@ export class GlassfyPaywall {
                 default:
                     break;
             }
-        });
+        };
+        GlassfyPaywall.currentListener = (Glassfy as any).addListener(paywallEvent, handler);
     }
 
     public static async close() {
-        (Glassfy as any).removeAllListeners('paywallEvent');
+        (Glassfy as any).removeAllListeners(paywallEvent);
         await Glassfy._closePaywall();
     }
 }
