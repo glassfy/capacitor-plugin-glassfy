@@ -230,11 +230,13 @@ public class GlassfyPlugin: CAPPlugin {
     }
     
     @objc func _openUrl(_ call: CAPPluginCall) {
-        guard let urlString = call.getString("url"), let url = URL(string: urlString) else {
-            call.reject("Invalid/missing url")
-            return
+        Task { @MainActor in
+            guard let urlString = call.getString("url"), let url = URL(string: urlString) else {
+                call.reject("Invalid/missing url")
+                return
+            }
+            UIApplication.shared.open(url)
+            call.resolve(["result": "sucess"])
         }
-        UIApplication.shared.open(url)
-        call.resolve(["result": "sucess"])
     }
 }
