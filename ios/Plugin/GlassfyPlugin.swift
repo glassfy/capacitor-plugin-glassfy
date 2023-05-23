@@ -203,8 +203,7 @@ public class GlassfyPlugin: CAPPlugin {
     
     private func showPaywall(id remoteConfig: String, then call: CAPPluginCall) async {
         do {
-            let paywall = try await Glassfy.paywall(id: remoteConfig)
-            let viewController = try await paywall.loadViewController()
+            let viewController = try await Glassfy.paywallViewController(withId: remoteConfig)
             let listener = CapacitorPaywallListener { self.notifyListeners($0, data: $1) }
             
             self.paywallViewController = viewController
