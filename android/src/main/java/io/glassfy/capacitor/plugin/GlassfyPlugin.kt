@@ -62,7 +62,7 @@ class GlassfyPlugin : Plugin() {
             apiKey,
             watcherMode,
             "capacitor",
-            "2.0.8"
+            "3.0.0"
         ) { value, error -> pluginCompletion(call, value, error) }
     }
 
@@ -236,7 +236,7 @@ class GlassfyPlugin : Plugin() {
         }
 
         var skuToUpgrade = call.getObject("skuToUpgrade")
-        val skuToUpgradeId = skuToUpgrade.getString("skuId")
+        val skuToUpgradeId = if (skuToUpgrade != null) skuToUpgrade.getString("skuId") else null
 
         var prorationMode = call.getInt("prorationMode")
         if (prorationMode == null  && skuToUpgradeId != null) {
