@@ -317,6 +317,7 @@ class GlassfyPlugin : Plugin() {
             call.reject("Only one paywall can be shown at a time, please call `GlassfyPaywall.close()`")
             return
         }
+        val preload = call.getBoolean("preload") ?: false
         val remoteConfig = call.getString("remoteConfig")
         if (remoteConfig == null) {
             call.reject("invalid/missing parameter 'remoteConfig'")
@@ -325,7 +326,7 @@ class GlassfyPlugin : Plugin() {
 
         val listener = CapacitorPaywallListener(this)
         paywallListener = listener
-        GlassfyPaywall.paywall(remoteConfig, listener, bridge.activity) { paywall, error ->
+        GlassfyPaywall.fragment(remoteConfig, listener, bridge.activity, preload) { paywall, error ->
             MainScope().run {
                 paywall?.show(bridge.activity.supportFragmentManager, "paywall")
             }

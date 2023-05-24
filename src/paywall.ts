@@ -6,10 +6,10 @@ const paywallEvent = 'paywallEvent';
 export class GlassfyPaywall {
     private static currentListener: any = null
 
-    public static async paywall(options: { remoteConfig: String, listener: PaywallListener | null }) { 
+    public static async paywall(options: { remoteConfig: String, preload: Boolean, listener: PaywallListener | null }) { 
         GlassfyPaywall.removeAllListeners();       
         GlassfyPaywall.setupListener(options.listener ?? {});
-        await Glassfy._paywall({ remoteConfig: options.remoteConfig });
+        await Glassfy._paywall({ remoteConfig: options.remoteConfig, preload: options.preload });
     }
 
     private static async removeAllListeners() {

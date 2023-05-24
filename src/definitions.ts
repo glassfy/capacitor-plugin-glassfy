@@ -263,7 +263,7 @@ export interface GlassfyPlugin {
 
   setAttributions(options: { items: GlassfyAttributionItem[] }): Promise<void>;
 
-  _paywall(options: { remoteConfig: String }): Promise<void>;
+  _paywall(options: { remoteConfig: String, preload: Boolean }): Promise<void>;
 
   _closePaywall(): Promise<void>;
 
