@@ -93,7 +93,7 @@ export class GlassfyWeb extends WebPlugin implements GlassfyPlugin {
     throw this.unimplemented('Not supported on web.');
   }
 
-  async _paywall(options: { remoteConfig: String, preload: Boolean }): Promise<void> {
+  async _paywall(options: { remoteConfig: String, awaitLoading: Boolean }): Promise<void> {
     console.log(options);
     throw this.unimplemented('Not supported on web.');
   }

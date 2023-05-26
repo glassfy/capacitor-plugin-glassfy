@@ -196,16 +196,21 @@ public class GlassfyPlugin: CAPPlugin {
             call.reject("Can only show one paywall at a time, please call `GlassfyPaywall.close()`")
             return
         }
-        let preload = call.getBool("preload") ?? false
+        let awaitLoading = call.getBool("awaitLoading") ?? false
         Task {
-            await showPaywall(id: remoteConfig, preload: preload, then: call)
+            await showPaywall(id: remoteConfig, awaitLoading: awaitLoading, then: call)
         }
     }
     
-    private func showPaywall(id remoteConfig: String, preload: Bool, then call: CAPPluginCall) async {
+    private func showPaywall(id remoteConfig: String, awaitLoading: Bool, then call: CAPPluginCall) async {
         do {
-            let viewController = try await Glassfy.paywallViewController(id: remoteConfig, preload: preload)
-            let listener = CapacitorPaywallListener { self.notifyListeners($0, data: $1) }
+            let viewController = try await Glassfy.paywallViewController(
+                remoteConfigurationId: remoteConfig, 
+                awaitLoading: awaitLoading
+            )
+            let listener = CapacitorPaywallListener { 
+                self.notifyListeners($0, data: $1) 
+            }
             
             self.paywallViewController = viewController
             self.paywallListener = listener
