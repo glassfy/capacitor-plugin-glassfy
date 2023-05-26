@@ -102,7 +102,6 @@ export interface GlassfyProductDiscount {
   readonly type: string;
 }
 
-
 export interface GlassfyProduct {
   readonly title: string;
   readonly identifier: string;

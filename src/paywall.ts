@@ -23,9 +23,8 @@ export class GlassfyPaywall {
             const close = (transaction: GlassfyTransaction | null, error: any | null) => {
                 if (listener.onClose) {
                     listener.onClose!(transaction, error);
-                } else {
-                    GlassfyPaywall.close();
                 }
+                GlassfyPaywall.close();
             };
 
             switch (eventName) {
