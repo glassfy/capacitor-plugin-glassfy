@@ -326,8 +326,9 @@ class GlassfyPlugin : Plugin() {
 
         val listener = CapacitorPaywallListener(this)
         paywallListener = listener
-        GlassfyPaywall.fragment(remoteConfig, bridge.activity, listener, awaitLoading) { paywall, error ->
+        GlassfyPaywall.fragment(remoteConfig, awaitLoading) { paywall, error ->
             MainScope().run {
+                paywall?.listener = listener
                 paywall?.show(bridge.activity.supportFragmentManager, "paywall")
             }
             paywallFragment = paywall
