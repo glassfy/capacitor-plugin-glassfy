@@ -326,7 +326,7 @@ class GlassfyPlugin : Plugin() {
 
         val listener = CapacitorPaywallListener(this)
         paywallListener = listener
-        GlassfyPaywall.fragment(remoteConfig, awaitLoading) { paywall, error ->
+        GlassfyPaywall.fragment(this.getContext(), remoteConfig, awaitLoading) { paywall, error ->
             MainScope().run {
                 paywall?.setCloseHandler(listener.onClose)
                 paywall?.setPurchaseHandler(listener.onPurchase)
