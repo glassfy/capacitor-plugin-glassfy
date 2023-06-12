@@ -328,7 +328,10 @@ class GlassfyPlugin : Plugin() {
         paywallListener = listener
         GlassfyPaywall.fragment(remoteConfig, awaitLoading) { paywall, error ->
             MainScope().run {
-                paywall?.listener = listener
+                paywall?.setCloseHandler(listener.onClose)
+                paywall?.setPurchaseHandler(listener.onPurchase)
+                paywall?.setRestoreHandler(listener.onRestore)
+                paywall?.setLinkHandler(listener.onLink)
                 paywall?.show(bridge.activity.supportFragmentManager, "paywall")
             }
             paywallFragment = paywall

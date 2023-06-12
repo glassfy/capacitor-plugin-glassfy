@@ -63,6 +63,8 @@ export class GlassfyPaywall {
                         } catch(error) {
                             close(null, error);
                         }
+                        GlassfyPaywall.removeAllListeners();
+                        GlassfyPaywall.close();
                     }
                     break;
 

@@ -5,12 +5,11 @@ import io.glassfy.androidsdk.GlassfyError
 import io.glassfy.androidsdk.model.Sku
 import io.glassfy.androidsdk.model.Transaction
 import io.glassfy.paywall.PaywallFragment
-import io.glassfy.paywall.PaywallListener
 import io.glassfy.glue.encodedJson
 import org.json.JSONObject
 
-internal class CapacitorPaywallListener(private val plugin: GlassfyPlugin) : PaywallListener {
-    override fun onClose(f: PaywallFragment, transaction: Transaction?, error: GlassfyError?) {
+internal class CapacitorPaywallListener(private val plugin: GlassfyPlugin) {
+    val onClose: (Transaction?, GlassfyError?) -> Unit = { transaction, error ->
         val payload = JSONObject().apply {
             put("event", "onClose")
             put("transaction", transaction?.encodedJson())
@@ -19,7 +18,7 @@ internal class CapacitorPaywallListener(private val plugin: GlassfyPlugin) : Pay
         plugin.sendEvent("paywallEvent", payload)
     }
 
-    override fun onLink(f: PaywallFragment, url: Uri) {
+    val onLink: (Uri) -> Unit = { url ->
         val payload = JSONObject().apply {
             put("event", "onLink")
             put("url", url.toString())
@@ -27,14 +26,14 @@ internal class CapacitorPaywallListener(private val plugin: GlassfyPlugin) : Pay
         plugin.sendEvent("paywallEvent", payload)
     }
 
-    override fun onRestore(f: PaywallFragment) {
+    val onRestore: () -> Unit = {
         val payload = JSONObject().apply {
             put("event", "onRestore")
         }
         plugin.sendEvent("paywallEvent", payload)
     }
 
-    override fun onPurchase(f: PaywallFragment, sku: Sku) {
+    val onPurchase: (Sku) -> Unit = { sku ->
         val payload = JSONObject().apply {
             put("event", "onPurchase")
             put("sku", sku.encodedJson())
