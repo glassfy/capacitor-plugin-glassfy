@@ -83,7 +83,6 @@ export class GlassfyWeb extends WebPlugin implements GlassfyPlugin {
     throw this.unimplemented('Not supported on web.');
   }
 
-
   async setAttribution(options: { type: GLASSFY_ATTRIBUTION, value: string }): Promise<void> {
     console.log(options);
     throw this.unimplemented('Not supported on web.');
@@ -94,5 +93,16 @@ export class GlassfyWeb extends WebPlugin implements GlassfyPlugin {
     throw this.unimplemented('Not supported on web.');
   }
 
+  async _paywall(options: { remoteConfig: String, awaitLoading: Boolean }): Promise<void> {
+    console.log(options);
+    throw this.unimplemented('Not supported on web.');
+  }
 
+  async _closePaywall(): Promise<void> {
+    throw this.unimplemented('Not supported on web.');
+  }
+
+  async _openUrl(): Promise<void> {
+    throw this.unimplemented('Not supported on web.');
+  }
 }

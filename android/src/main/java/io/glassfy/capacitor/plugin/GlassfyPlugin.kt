@@ -1,30 +1,33 @@
 package io.glassfy.capacitor.plugin
 
+import android.content.Intent
+import android.net.Uri
+import androidx.fragment.app.DialogFragment
 import com.getcapacitor.JSObject
 import com.getcapacitor.Plugin
 import com.getcapacitor.annotation.CapacitorPlugin
 import com.getcapacitor.PluginMethod
 import com.getcapacitor.PluginCall
 import io.glassfy.glue.GlassfyGlue
+import io.glassfy.paywall.GlassfyPaywall
+import kotlinx.coroutines.MainScope
 import org.json.JSONArray
 import org.json.JSONObject
 
-//import io.glassfy.capacitor.plugin.Glassfy2
-
 @CapacitorPlugin(name = "Glassfy")
 class GlassfyPlugin : Plugin() {
+    private var paywallListener: CapacitorPaywallListener? = null
+    private var paywallFragment: DialogFragment? = null
 
     fun JSONObject.toMap(): Map<String, *> = keys().asSequence().associateWith {
-        when (val value = this[it])
-        {
-            is JSONArray ->
-            {
+        when (val value = this[it]) {
+            is JSONArray -> {
                 val map = (0 until value.length()).associate { Pair(it.toString(), value[it]) }
                 JSONObject(map).toMap().values.toList()
             }
             is JSONObject -> value.toMap()
             JSONObject.NULL -> null
-            else            -> value
+            else -> value
         }
     }
 
@@ -33,13 +36,10 @@ class GlassfyPlugin : Plugin() {
             call.reject(error)
             return
         }
-
         if (value==null) {
             call.resolve()
             return;
         }
-
-        // convert json string to JSONOBJECT
         val jo = value.let { JSObject(it) }
         call.resolve(jo)
     }
@@ -251,11 +251,7 @@ class GlassfyPlugin : Plugin() {
         }
 
         GlassfyGlue.purchaseSku(activity,skuId,skuToUpgradeId,prorationMode) { value, error ->
-            pluginCompletion(
-                    call,
-                    value,
-                    error
-            )
+            pluginCompletion(call, value, error)
         }
     }
 
@@ -294,7 +290,7 @@ class GlassfyPlugin : Plugin() {
     @PluginMethod
     fun setAttributions(call: PluginCall) {
         val items = call.getArray("items")
-        if (items == null ) {
+        if (items == null) {
             call.reject("invalid/missing parameter 'items'")
             return
         }
@@ -313,7 +309,63 @@ class GlassfyPlugin : Plugin() {
                 error
             )
         }
-
     }
 
+    @PluginMethod
+    fun _paywall(call: PluginCall) {
+        if (paywallFragment != null) {
+            call.reject("Only one paywall can be shown at a time, please call `GlassfyPaywall.close()`")
+            return
+        }
+        val awaitLoading = call.getBoolean("awaitLoading") ?: false
+        val remoteConfig = call.getString("remoteConfig")
+        if (remoteConfig == null) {
+            call.reject("invalid/missing parameter 'remoteConfig'")
+            return
+        }
+
+        val listener = CapacitorPaywallListener(this)
+        paywallListener = listener
+        GlassfyPaywall.fragment(this.getContext(), remoteConfig, awaitLoading) { paywall, error ->
+            MainScope().run {
+                paywall?.setCloseHandler(listener.onClose)
+                paywall?.setPurchaseHandler(listener.onPurchase)
+                paywall?.setRestoreHandler(listener.onRestore)
+                paywall?.setLinkHandler(listener.onLink)
+                paywall?.show(bridge.activity.supportFragmentManager, "paywall")
+            }
+            paywallFragment = paywall
+            pluginCompletion(call, null, null)
+        }
+    }
+
+    @PluginMethod
+    fun _openUrl(call: PluginCall) {
+        val urlString = call.getString("url")
+        if (urlString == null) {
+            call.reject("invalid/missing parameter 'url'")
+            return
+        }
+        try {
+            val i = Intent(Intent.ACTION_VIEW).apply { data = Uri.parse(urlString) }
+            bridge.activity.startActivity(i)
+        } catch(_: Exception) {
+            call.reject("invalid parameter 'url'")
+        }
+    }
+
+    @PluginMethod
+    fun _closePaywall(call: PluginCall) {
+        MainScope().run {
+            paywallFragment?.dismiss()
+            paywallFragment = null
+            paywallListener = null
+        }
+        pluginCompletion(call, null, null)
+    }
+
+    internal fun sendEvent(eventName: String, payload: JSONObject) {
+        val jsObject = JSObject(payload.toString());
+        notifyListeners(eventName, jsObject);
+    }
 }

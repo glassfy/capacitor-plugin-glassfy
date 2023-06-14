@@ -1,28 +1,26 @@
 import Capacitor
 import Foundation
+import Glassfy
 import GlassfyGlue
 
-/**
- * Please read the Capacitor iOS Plugin Development Guide
- * here: https://capacitorjs.com/docs/plugins/ios
- */
 @objc(GlassfyPlugin)
 public class GlassfyPlugin: CAPPlugin {
+    private weak var paywallViewController: UIViewController?
+    private var paywallListener: PaywallListener?
     
-    func convertResponseFromGlassfyGlue(_ call: CAPPluginCall) -> (Dictionary<String,Any>?,Error?) -> Void {
-        return {value,error in
-            if let error = error {
+    func convertResponseFromGlassfyGlue(_ call: CAPPluginCall) -> ([String: Any]?, Error?) -> Void {
+        return { value, error in
+            if let error {
                 call.reject(error.localizedDescription)
                 return
             }
-            if let value = value {
+            if let value {
                 call.resolve(value)
             } else {
                 call.resolve()
             }
         }
-    }
-    
+    }    
     
     @objc func sdkVersion(_ call: CAPPluginCall) {
         GlassfyGlue.sdkVersion (completion: self.convertResponseFromGlassfyGlue(call));
@@ -93,11 +91,9 @@ public class GlassfyPlugin: CAPPlugin {
         default:
             call.reject("invalid skuWithIdAndStore 'store' parameters")
             return
-        }
-        
+        }        
         GlassfyGlue.sku(withId: identifier, store: store, completion: self.convertResponseFromGlassfyGlue(call));
     }
-    
     
     @objc func connectCustomSubscriber(_ call: CAPPluginCall) {
         guard let subscriberId = call.getString("subscriberId") else {
@@ -116,7 +112,6 @@ public class GlassfyPlugin: CAPPlugin {
             call.reject("invalid force parameter")
             return
         }
-
         GlassfyGlue.connectPaddleLicenseKey(licenseKey, force: force , completion: self.convertResponseFromGlassfyGlue(call));
     }
 
@@ -129,7 +124,6 @@ public class GlassfyPlugin: CAPPlugin {
             call.reject("invalid force parameter")
             return
         }
-
         GlassfyGlue.connectGlassfyUniversalCode(universalCode, force: force , completion: self.convertResponseFromGlassfyGlue(call));
     }
     
@@ -138,7 +132,6 @@ public class GlassfyPlugin: CAPPlugin {
             call.reject("invalid email parameters")
             return
         }
-
         GlassfyGlue.setEmailUserProperty(email, withCompletion: self.convertResponseFromGlassfyGlue(call));
     }
     
@@ -147,7 +140,6 @@ public class GlassfyPlugin: CAPPlugin {
             call.reject("invalid setDeviceToken parameters")
             return
         }
-        
         GlassfyGlue.setDeviceToken(token, withCompletion: self.convertResponseFromGlassfyGlue(call));
     }
 
@@ -156,23 +148,18 @@ public class GlassfyPlugin: CAPPlugin {
             call.reject("invalid setDeviceToken parameters")
             return
         }
-        
         GlassfyGlue.setExtraUserProperty(extra, withCompletion: self.convertResponseFromGlassfyGlue(call));
     }
 
-    @objc func getUserProperty(_ call: CAPPluginCall) {
-        
-        GlassfyGlue.getExtraUserProperty(completion: self.convertResponseFromGlassfyGlue(call));
-        
+    @objc func getUserProperty(_ call: CAPPluginCall) {        
+        GlassfyGlue.getExtraUserProperty(completion: self.convertResponseFromGlassfyGlue(call));        
     }
-
 
     @objc func purchaseSku(_ call: CAPPluginCall) {
         guard let sku = call.getObject("sku") else {
             call.reject("Invalid SKU")
             return
-        }
-                
+        }                
         GlassfyGlue.purchaseSku(sku, withCompletion: self.convertResponseFromGlassfyGlue(call));
     }
     
@@ -189,7 +176,6 @@ public class GlassfyPlugin: CAPPlugin {
             call.reject("invalid/missing value")
             return
         }
-
         GlassfyGlue.setAttributionType(NSNumber(integerLiteral: type), value:value, completion: self.convertResponseFromGlassfyGlue(call));
     }
     
@@ -198,7 +184,64 @@ public class GlassfyPlugin: CAPPlugin {
             call.reject("invalid/missing items")
             return
         }
-
-        GlassfyGlue.setAttributions(items, completion:  self.convertResponseFromGlassfyGlue(call));
+        GlassfyGlue.setAttributions(items, completion: self.convertResponseFromGlassfyGlue(call));
+    }
+    
+    @objc func _paywall(_ call: CAPPluginCall) {
+        guard let remoteConfig = call.getString("remoteConfig") else {
+            call.reject("Invalid/missing remoteConfig")
+            return
+        }
+        guard paywallViewController == nil else {
+            call.reject("Can only show one paywall at a time, please call `GlassfyPaywall.close()`")
+            return
+        }
+        let awaitLoading = call.getBool("awaitLoading") ?? false
+        Task {
+            await showPaywall(id: remoteConfig, awaitLoading: awaitLoading, then: call)
+        }
+    }
+    
+    private func showPaywall(id remoteConfig: String, awaitLoading: Bool, then call: CAPPluginCall) async {
+        do {
+            let viewController = try await Glassfy.paywallViewController(
+                remoteConfigurationId: remoteConfig, 
+                awaitLoading: awaitLoading
+            )
+            let listener = CapacitorPaywallListener { 
+                self.notifyListeners($0, data: $1) 
+            }
+            
+            self.paywallViewController = viewController
+            self.paywallListener = listener
+            
+            Task { @MainActor in
+                viewController.install(listener)
+                bridge?.viewController?.present(viewController, animated: true)                
+                call.resolve(["result": "sucess"])
+            }
+        } catch {
+            call.reject("Failed to show paywall: \(error)")
+        }
+    }
+    
+    @objc func _closePaywall(_ call: CAPPluginCall) {
+        Task { @MainActor in
+            paywallViewController?.dismiss(animated: true)
+            paywallViewController = nil
+            paywallListener = nil
+            call.resolve(["result": "sucess"])
+        }
+    }
+    
+    @objc func _openUrl(_ call: CAPPluginCall) {
+        Task { @MainActor in
+            guard let urlString = call.getString("url"), let url = URL(string: urlString) else {
+                call.reject("Invalid/missing url")
+                return
+            }
+            UIApplication.shared.open(url)
+            call.resolve(["result": "sucess"])
+        }
     }
 }
