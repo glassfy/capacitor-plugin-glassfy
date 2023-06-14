@@ -60,6 +60,9 @@ ionic capacitor open ios
 * [`restorePurchases()`](#restorepurchases)
 * [`setAttribution(...)`](#setattribution)
 * [`setAttributions(...)`](#setattributions)
+* [`_paywall(...)`](#_paywall)
+* [`_closePaywall()`](#_closepaywall)
+* [`_openUrl(...)`](#_openurl)
 * [Interfaces](#interfaces)
 * [Type Aliases](#type-aliases)
 * [Enums](#enums)
@@ -322,6 +325,41 @@ setAttributions(options: { items: GlassfyAttributionItem[]; }) => Promise<void>
 --------------------
 
 
+### _paywall(...)
+
+```typescript
+_paywall(options: { remoteConfig: String; awaitLoading: Boolean; }) => Promise<void>
+```
+
+| Param         | Type                                                                                                       |
+| ------------- | ---------------------------------------------------------------------------------------------------------- |
+| **`options`** | <code>{ remoteConfig: <a href="#string">String</a>; awaitLoading: <a href="#boolean">Boolean</a>; }</code> |
+
+--------------------
+
+
+### _closePaywall()
+
+```typescript
+_closePaywall() => Promise<void>
+```
+
+--------------------
+
+
+### _openUrl(...)
+
+```typescript
+_openUrl(options: { url: String; }) => Promise<void>
+```
+
+| Param         | Type                                                |
+| ------------- | --------------------------------------------------- |
+| **`options`** | <code>{ url: <a href="#string">String</a>; }</code> |
+
+--------------------
+
+
 ### Interfaces
 
 
@@ -504,15 +542,15 @@ Allows manipulation and formatting of text strings and determination and locatio
 | Prop             | Type                 | Description                                                                                                                                                          |
 | ---------------- | -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **`source`**     | <code>string</code>  | Returns a copy of the text of the regular expression pattern. Read-only. The regExp argument is a Regular expression object. It can be a variable name or a literal. |
-| **`global`**     | <code>boolean</code> | Returns a Boolean value indicating the state of the global flag (g) used with a regular expression. Default is false. Read-only.                                     |
-| **`ignoreCase`** | <code>boolean</code> | Returns a Boolean value indicating the state of the ignoreCase flag (i) used with a regular expression. Default is false. Read-only.                                 |
-| **`multiline`**  | <code>boolean</code> | Returns a Boolean value indicating the state of the multiline flag (m) used with a regular expression. Default is false. Read-only.                                  |
+| **`global`**     | <code>boolean</code> | Returns a <a href="#boolean">Boolean</a> value indicating the state of the global flag (g) used with a regular expression. Default is false. Read-only.              |
+| **`ignoreCase`** | <code>boolean</code> | Returns a <a href="#boolean">Boolean</a> value indicating the state of the ignoreCase flag (i) used with a regular expression. Default is false. Read-only.          |
+| **`multiline`**  | <code>boolean</code> | Returns a <a href="#boolean">Boolean</a> value indicating the state of the multiline flag (m) used with a regular expression. Default is false. Read-only.           |
 | **`lastIndex`**  | <code>number</code>  |                                                                                                                                                                      |
 
 | Method      | Signature                                                                     | Description                                                                                                                   |
 | ----------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
 | **exec**    | (string: string) =&gt; <a href="#regexpexecarray">RegExpExecArray</a> \| null | Executes a search on a string using a regular expression pattern, and returns an array containing the results of that search. |
-| **test**    | (string: string) =&gt; boolean                                                | Returns a Boolean value that indicates whether or not a pattern exists in a searched string.                                  |
+| **test**    | (string: string) =&gt; boolean                                                | Returns a <a href="#boolean">Boolean</a> value that indicates whether or not a pattern exists in a searched string.           |
 | **compile** | () =&gt; this                                                                 |                                                                                                                               |
 
 
@@ -539,6 +577,13 @@ Allows manipulation and formatting of text strings and determination and locatio
 | ----------- | ------------------------------------------------------------------- |
 | **`type`**  | <code><a href="#glassfy_attribution">GLASSFY_ATTRIBUTION</a></code> |
 | **`value`** | <code>string</code>                                                 |
+
+
+#### Boolean
+
+| Method      | Signature        | Description                                          |
+| ----------- | ---------------- | ---------------------------------------------------- |
+| **valueOf** | () =&gt; boolean | Returns the primitive value of the specified object. |
 
 
 ### Type Aliases
