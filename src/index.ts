@@ -8,4 +8,3 @@ const Glassfy = registerPlugin<GlassfyPlugin>('Glassfy', {
 
 export * from './definitions';
 export { Glassfy };
-export { GlassfyPaywall, PaywallListener } from './paywall';
