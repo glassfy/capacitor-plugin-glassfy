@@ -37,7 +37,7 @@ public class GlassfyPlugin: CAPPlugin {
             withApiKey: apiKey, 
             watcherMode: watcherMode, 
             crossPlatformSdkFramework: "capacitor",
-            crossPlatformSdkVersion: "3.1.1",
+            crossPlatformSdkVersion: "3.2.0",
             withCompletion: self.convertResponseFromGlassfyGlue(call)
         )
     }
