@@ -195,7 +195,7 @@ export interface GlassfyTransaction {
 }
 
 export interface GlassfyUserProperties {
-  readonly email: String;
+  readonly email: string;
   readonly token: boolean;
   readonly extra: GlassfyExtraProperty;
 }
@@ -263,9 +263,9 @@ export interface GlassfyPlugin {
 
   setAttributions(options: { items: GlassfyAttributionItem[] }): Promise<void>;
 
-  _paywall(options: { remoteConfig: String, awaitLoading: Boolean }): Promise<void>;
+  _paywall(options: { remoteConfig: string, awaitLoading: boolean }): Promise<void>;
 
   _closePaywall(): Promise<void>;
 
-  _openUrl(options: { url: String }): Promise<void>;
+  _openUrl(options: { url: string }): Promise<void>;
 }
