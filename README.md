@@ -404,6 +404,7 @@ _openUrl(options: { url: String; }) => Promise<void>
 | **`description`**       | <code>string</code>                                                       |
 | **`price`**             | <code>number</code>                                                       |
 | **`currencyCode`**      | <code>string</code>                                                       |
+| **`period`**            | <code>string</code>                                                       |
 | **`introductoryPrice`** | <code><a href="#glassfyproductdiscount">GlassfyProductDiscount</a></code> |
 | **`discounts`**         | <code>GlassfyProductDiscount[]</code>                                     |
 

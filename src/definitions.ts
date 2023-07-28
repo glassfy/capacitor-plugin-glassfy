@@ -108,6 +108,7 @@ export interface GlassfyProduct {
   readonly description: string;
   readonly price: number;
   readonly currencyCode: string;
+  readonly period: string;
   readonly introductoryPrice: GlassfyProductDiscount;
   readonly discounts: GlassfyProductDiscount[];
 }
@@ -237,13 +238,13 @@ export interface GlassfyPlugin {
    * For more details, check the documentation https://docs.glassfy.io/dashboard/configure-products
    */
   skuWithId(options: { identifier: string }): Promise<GlassfySku>;
-  
+
   skuWithIdAndStore(options: { identifier: string, store: GLASSFY_STORE }): Promise<GlassfySkuBase>;
 
   connectCustomSubscriber(options: { subscriberId: string }): Promise<GlassfySku>;
 
   connectPaddleLicenseKey(options: { licenseKey: string, force: boolean }): Promise<void>;
-  
+
   connectGlassfyUniversalCode(options: { universalCode: string, force: boolean }): Promise<void>;
 
   setEmailUserProperty(options: { email: string }): Promise<void>;
