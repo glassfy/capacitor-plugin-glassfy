@@ -108,6 +108,7 @@ export interface GlassfyProduct {
   readonly description: string;
   readonly price: number;
   readonly currencyCode: string;
+  readonly period: string;
   readonly introductoryPrice: GlassfyProductDiscount;
   readonly discounts: GlassfyProductDiscount[];
 }
@@ -194,7 +195,7 @@ export interface GlassfyTransaction {
 }
 
 export interface GlassfyUserProperties {
-  readonly email: String;
+  readonly email: string;
   readonly token: boolean;
   readonly extra: GlassfyExtraProperty;
 }
@@ -237,13 +238,13 @@ export interface GlassfyPlugin {
    * For more details, check the documentation https://docs.glassfy.io/dashboard/configure-products
    */
   skuWithId(options: { identifier: string }): Promise<GlassfySku>;
-  
+
   skuWithIdAndStore(options: { identifier: string, store: GLASSFY_STORE }): Promise<GlassfySkuBase>;
 
   connectCustomSubscriber(options: { subscriberId: string }): Promise<GlassfySku>;
 
   connectPaddleLicenseKey(options: { licenseKey: string, force: boolean }): Promise<void>;
-  
+
   connectGlassfyUniversalCode(options: { universalCode: string, force: boolean }): Promise<void>;
 
   setEmailUserProperty(options: { email: string }): Promise<void>;
@@ -262,9 +263,9 @@ export interface GlassfyPlugin {
 
   setAttributions(options: { items: GlassfyAttributionItem[] }): Promise<void>;
 
-  _paywall(options: { remoteConfig: String, awaitLoading: Boolean }): Promise<void>;
+  _paywall(options: { remoteConfig: string, awaitLoading: boolean }): Promise<void>;
 
   _closePaywall(): Promise<void>;
 
-  _openUrl(options: { url: String }): Promise<void>;
+  _openUrl(options: { url: string }): Promise<void>;
 }

@@ -14,6 +14,6 @@ Pod::Spec.new do |s|
   s.ios.deployment_target  = '13.0'
   s.dependency 'Capacitor'
   s.swift_version = '5.1'
-  s.dependency 'GlassfyGlue', '1.4.0'
+  s.dependency 'GlassfyGlue', '1.4.1'
   s.dependency 'Glassfy', '1.4.0'
 end
