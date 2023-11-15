@@ -276,12 +276,12 @@ getUserProperty() => Promise<GlassfyUserProperties>
 ### purchaseSku(...)
 
 ```typescript
-purchaseSku(options: { sku: GlassfySku; skuToUpgrade?: GlassfySku; prorationMode?: GLASSFY_PRORATION_MODE; }) => Promise<GlassfyTransaction>
+purchaseSku(options: { sku: GlassfySku; skuToUpgrade?: GlassfySku; replacementMode?: GLASSFY_REPLACEMENT_MODE; }) => Promise<GlassfyTransaction>
 ```
 
-| Param         | Type                                                                                                                                                                                           |
-| ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **`options`** | <code>{ sku: <a href="#glassfysku">GlassfySku</a>; skuToUpgrade?: <a href="#glassfysku">GlassfySku</a>; prorationMode?: <a href="#glassfy_proration_mode">GLASSFY_PRORATION_MODE</a>; }</code> |
+| Param         | Type                                                                                                                                                                                                 |
+| ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`options`** | <code>{ sku: <a href="#glassfysku">GlassfySku</a>; skuToUpgrade?: <a href="#glassfysku">GlassfySku</a>; replacementMode?: <a href="#glassfy_replacement_mode">GLASSFY_REPLACEMENT_MODE</a>; }</code> |
 
 **Returns:** <code>Promise&lt;<a href="#glassfytransaction">GlassfyTransaction</a>&gt;</code>
 
@@ -387,12 +387,15 @@ _openUrl(options: { url: string; }) => Promise<void>
 
 #### GlassfySku
 
-| Prop                          | Type                                                                  |
-| ----------------------------- | --------------------------------------------------------------------- |
-| **`introductoryEligibility`** | <code><a href="#glassfy_eleggibility">GLASSFY_ELEGGIBILITY</a></code> |
-| **`promotionalEligibility`**  | <code><a href="#glassfy_eleggibility">GLASSFY_ELEGGIBILITY</a></code> |
-| **`extravars`**               | <code>{ [key: string]: string; }</code>                               |
-| **`product`**                 | <code><a href="#glassfyproduct">GlassfyProduct</a></code>             |
+| Prop                          | Type                                                                      |
+| ----------------------------- | ------------------------------------------------------------------------- |
+| **`introductoryEligibility`** | <code><a href="#glassfy_elegibility">GLASSFY_ELEGIBILITY</a></code>       |
+| **`promotionalEligibility`**  | <code><a href="#glassfy_elegibility">GLASSFY_ELEGIBILITY</a></code>       |
+| **`extravars`**               | <code>{ [key: string]: string; }</code>                                   |
+| **`product`**                 | <code><a href="#glassfyproduct">GlassfyProduct</a></code>                 |
+| **`basePlanId`**              | <code>string</code>                                                       |
+| **`offerId`**                 | <code>string</code>                                                       |
+| **`discount`**                | <code><a href="#glassfyproductdiscount">GlassfyProductDiscount</a></code> |
 
 
 #### GlassfyProduct
@@ -407,6 +410,7 @@ _openUrl(options: { url: string; }) => Promise<void>
 | **`period`**            | <code>string</code>                                                       |
 | **`introductoryPrice`** | <code><a href="#glassfyproductdiscount">GlassfyProductDiscount</a></code> |
 | **`discounts`**         | <code>GlassfyProductDiscount[]</code>                                     |
+| **`basePlanId`**        | <code>string</code>                                                       |
 
 
 #### GlassfyProductDiscount
@@ -477,6 +481,8 @@ _openUrl(options: { url: string; }) => Promise<void>
 | -------------------------- | -------------------- |
 | **`isInIntroOfferPeriod`** | <code>boolean</code> |
 | **`isInTrialPeriod`**      | <code>boolean</code> |
+| **`basePlanId`**           | <code>string</code>  |
+| **`offerId`**              | <code>string</code>  |
 
 
 #### GlassfySkuBase
@@ -536,7 +542,7 @@ _openUrl(options: { url: string; }) => Promise<void>
 | **`ALL`**   | <code>3</code> |
 
 
-#### GLASSFY_ELEGGIBILITY
+#### GLASSFY_ELEGIBILITY
 
 | Members            | Value           |
 | ------------------ | --------------- |
@@ -596,16 +602,16 @@ _openUrl(options: { url: string; }) => Promise<void>
 | **`AUTORENEWON`**          | <code>5</code>  |
 
 
-#### GLASSFY_PRORATION_MODE
+#### GLASSFY_REPLACEMENT_MODE
 
-| Members                                             | Value          |
-| --------------------------------------------------- | -------------- |
-| **`UNKNOWN_SUBSCRIPTION_UPGRADE_DOWNGRADE_POLICY`** | <code>0</code> |
-| **`IMMEDIATE_WITH_TIME_PRORATION`**                 | <code>1</code> |
-| **`IMMEDIATE_AND_CHARGE_PRORATED_PRICE`**           | <code>2</code> |
-| **`IMMEDIATE_WITHOUT_PRORATION`**                   | <code>3</code> |
-| **`DEFERRED`**                                      | <code>4</code> |
-| **`IMMEDIATE_AND_CHARGE_FULL_PRICE`**               | <code>5</code> |
+| Members                        | Value          |
+| ------------------------------ | -------------- |
+| **`UNKNOWN_REPLACEMENT_MODE`** | <code>0</code> |
+| **`WITH_TIME_PRORATION`**      | <code>1</code> |
+| **`CHARGE_PRORATED_PRICE`**    | <code>2</code> |
+| **`WITHOUT_PRORATION`**        | <code>3</code> |
+| **`CHARGE_FULL_PRICE`**        | <code>5</code> |
+| **`DEFERRED`**                 | <code>6</code> |
 
 
 #### GLASSFY_ATTRIBUTION

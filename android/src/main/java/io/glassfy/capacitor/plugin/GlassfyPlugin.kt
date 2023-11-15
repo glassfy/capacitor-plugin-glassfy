@@ -62,7 +62,7 @@ class GlassfyPlugin : Plugin() {
             apiKey,
             watcherMode,
             "capacitor",
-            "3.2.1"
+            "3.3.0"
         ) { value, error -> pluginCompletion(call, value, error) }
     }
 
@@ -223,36 +223,43 @@ class GlassfyPlugin : Plugin() {
 
     @PluginMethod
     fun purchaseSku(call: PluginCall) {
-        var sku = call.getObject("sku")
-        if (sku == null ) {
-            call.reject("missing sku parameter")
-            return
-        }
-
-        val skuId = sku.getString("skuId")
-        if (skuId == null ) {
-            call.reject("invalid sku object")
-            return
-        }
-
-        var skuToUpgrade = call.getObject("skuToUpgrade")
-        val skuToUpgradeId = if (skuToUpgrade != null) skuToUpgrade.getString("skuId") else null
-
-        var prorationMode = call.getInt("prorationMode")
-        if (prorationMode == null  && skuToUpgradeId != null) {
-            prorationMode = 1
-        }
-
-        val activity = this.activity
-
         if (activity == null) {
             call.reject("Invalid Android Activity", "Invalid Android Activity")
             return
         }
 
-        GlassfyGlue.purchaseSku(activity,skuId,skuToUpgradeId,prorationMode) { value, error ->
-            pluginCompletion(call, value, error)
+        val sku = call.getObject("sku", null)
+        if (sku == null) {
+            call.reject("missing sku parameter")
+            return
         }
+        val skuId = sku.getString("skuId")
+        if (skuId == null) {
+            call.reject("invalid sku object")
+            return
+        }
+
+        val skuToUpgrade = call.getObject("skuToUpgrade", null)
+
+        var subscriptionUpdateId: String? = null
+        var replacementMode: Int? = null
+        if (skuToUpgrade != null) {
+            subscriptionUpdateId = skuToUpgrade.getString("skuId")
+            if (subscriptionUpdateId == null) {
+                call.reject("Invalid skuToUpgrade")
+                return
+            }
+            replacementMode = call.getInt("replacementMode")
+            if (replacementMode == null) {
+                replacementMode = 1
+            }
+        }
+        GlassfyGlue.purchaseSku(
+            activity,
+            skuId,
+            subscriptionUpdateId,
+            replacementMode
+        ) { v, e -> pluginCompletion(call, v, e) }
     }
 
     @PluginMethod

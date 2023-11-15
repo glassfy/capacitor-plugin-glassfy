@@ -1,4 +1,4 @@
-export enum GLASSFY_ELEGGIBILITY {
+export enum GLASSFY_ELEGIBILITY {
   ELEGIBLE = 1,
   NON_ELEGIBLE = -1,
   UNKNOWN = 0,
@@ -47,13 +47,13 @@ export enum GLASSFY_ATTRIBUTION {
   AID = 8
 }
 
-export enum GLASSFY_PRORATION_MODE {
-  UNKNOWN_SUBSCRIPTION_UPGRADE_DOWNGRADE_POLICY = 0,
-  IMMEDIATE_WITH_TIME_PRORATION = 1,
-  IMMEDIATE_AND_CHARGE_PRORATED_PRICE = 2,
-  IMMEDIATE_WITHOUT_PRORATION = 3,
-  DEFERRED = 4,
-  IMMEDIATE_AND_CHARGE_FULL_PRICE = 5
+export enum GLASSFY_REPLACEMENT_MODE {
+  UNKNOWN_REPLACEMENT_MODE = 0,
+  WITH_TIME_PRORATION = 1,
+  CHARGE_PRORATED_PRICE = 2,
+  WITHOUT_PRORATION = 3,
+  CHARGE_FULL_PRICE = 5,
+  DEFERRED = 6
 }
 
 export enum GLASSFY_ENTITLEMENT {
@@ -111,6 +111,7 @@ export interface GlassfyProduct {
   readonly period: string;
   readonly introductoryPrice: GlassfyProductDiscount;
   readonly discounts: GlassfyProductDiscount[];
+  readonly basePlanId: string;
 }
 
 export interface GlassfySkuBase {
@@ -120,10 +121,13 @@ export interface GlassfySkuBase {
 }
 
 export interface GlassfySku extends GlassfySkuBase {
-  readonly introductoryEligibility: GLASSFY_ELEGGIBILITY;
-  readonly promotionalEligibility: GLASSFY_ELEGGIBILITY;
+  readonly introductoryEligibility: GLASSFY_ELEGIBILITY;
+  readonly promotionalEligibility: GLASSFY_ELEGIBILITY;
   readonly extravars: { [key: string]: string };
   readonly product: GlassfyProduct;
+  readonly basePlanId: string;
+  readonly offerId: string;
+  readonly discount: GlassfyProductDiscount;
 }
 
 export interface GlassfySkuPaddle extends GlassfySkuBase {
@@ -138,6 +142,8 @@ export interface GlassfySkuPaddle extends GlassfySkuBase {
 export interface GlassfyAccountableSku extends GlassfySkuBase {
   readonly isInIntroOfferPeriod: boolean;
   readonly isInTrialPeriod: boolean;
+  readonly basePlanId: string;
+  readonly offerId: string;
 }
 
 export interface GlassfyOffering {
@@ -255,7 +261,7 @@ export interface GlassfyPlugin {
 
   getUserProperty(): Promise<GlassfyUserProperties>;
 
-  purchaseSku(options: { sku: GlassfySku, skuToUpgrade?: GlassfySku, prorationMode?: GLASSFY_PRORATION_MODE }): Promise<GlassfyTransaction>;
+  purchaseSku(options: { sku: GlassfySku, skuToUpgrade?: GlassfySku, replacementMode?: GLASSFY_REPLACEMENT_MODE }): Promise<GlassfyTransaction>;
 
   restorePurchases(): Promise<GlassfyPermissions>;
 
