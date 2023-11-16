@@ -1,10 +1,21 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { HomePage } from './pages/home/home.page';
+import { PermissionComponent } from './pages/permission/permission.component';
+import { OfferingComponent } from './pages/offering/offering.component';
 
 const routes: Routes = [
   {
     path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+    component: HomePage,
+  },
+  {
+    path: 'home/permission',
+    component: PermissionComponent,
+  },
+  {
+    path: 'home/offering',
+    component: OfferingComponent,
   },
   {
     path: '',

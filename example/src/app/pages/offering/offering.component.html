@@ -1,0 +1,63 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button *ngIf="level > 0"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Offering - {{(offering$ | async).offeringId}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light">
+  <ng-container *ngIf="(offering$ | async) as o; else loading">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>{{o.offeringId}}</ion-card-title>
+        <ion-card-subtitle>{{o.skus.length}} Sku</ion-card-subtitle>
+      </ion-card-header>
+    </ion-card>
+
+    <ion-card *ngFor="let s of o.skus" (click)="purchaseSku(s)">
+      <ion-card-content>
+        <ion-list>
+          <ion-item>
+            <ion-label>SkuId</ion-label>
+            <ion-label slot="end">{{ s.skuId }}</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>ProductId</ion-label>
+            <ion-label slot="end">{{ s.productId }}</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>BasePlanId</ion-label>
+            <ion-label slot="end">{{ s.basePlanId ?? '--'}}</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>OfferId</ion-label>
+            <ion-label slot="end">{{ s.offerId ?? '--'}}</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>Original Price</ion-label>
+            <ion-label slot="end">{{ s.product.price }}</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>Intro Offer</ion-label>
+            <ion-label slot="end">{{ s.product?.introductoryPrice?.price ?? '--'}}</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>Promo Offer</ion-label>
+            <ion-label slot="end">{{ s.discount?.price ?? '--'}}</ion-label>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-label>FINAL Price</ion-label>
+            <ion-label slot="end">{{ s.product?.introductoryPrice?.price ?? (s.discount?.price ??
+              s.product.price)}}</ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+  </ng-container>
+
+  <ng-template #loading>
+    Loading offering...
+  </ng-template>
+</ion-content>
