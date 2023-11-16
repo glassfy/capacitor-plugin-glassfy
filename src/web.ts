@@ -1,6 +1,6 @@
 import { WebPlugin } from '@capacitor/core';
 
-import type { GlassfyPlugin, GlassfyVersion, GlassfyOfferings, GlassfySku, GlassfyPermissions, GLASSFY_PRORATION_MODE, GLASSFY_ATTRIBUTION, GlassfyAttributionItem, GLASSFY_LOGLEVEL, GlassfyTransaction, GlassfySkuBase, GLASSFY_STORE, GlassfyUserProperties, GlassfyPurchasesHistory } from './definitions';
+import type { GlassfyPlugin, GlassfyVersion, GlassfyOfferings, GlassfySku, GlassfyPermissions, GLASSFY_ATTRIBUTION, GlassfyAttributionItem, GLASSFY_LOGLEVEL, GlassfyTransaction, GlassfySkuBase, GLASSFY_STORE, GlassfyUserProperties, GlassfyPurchasesHistory, GLASSFY_REPLACEMENT_MODE } from './definitions';
 
 export class GlassfyWeb extends WebPlugin implements GlassfyPlugin {
 
@@ -74,7 +74,7 @@ export class GlassfyWeb extends WebPlugin implements GlassfyPlugin {
     throw this.unimplemented('Not supported on web.');
   }
 
-  async purchaseSku(options: { sku: GlassfySku, skuToUpgrade?: GlassfySku, prorationMode?: GLASSFY_PRORATION_MODE }): Promise<GlassfyTransaction> {
+  async purchaseSku(options: { sku: GlassfySku, skuToUpgrade?: GlassfySku, replacementMode?: GLASSFY_REPLACEMENT_MODE }): Promise<GlassfyTransaction> {
     console.log(options);
     throw this.unimplemented('Not supported on web.');
   }
@@ -93,7 +93,7 @@ export class GlassfyWeb extends WebPlugin implements GlassfyPlugin {
     throw this.unimplemented('Not supported on web.');
   }
 
-  async _paywall(options: { remoteConfig: String, awaitLoading: Boolean }): Promise<void> {
+  async _paywall(options: { remoteConfig: string, awaitLoading: boolean }): Promise<void> {
     console.log(options);
     throw this.unimplemented('Not supported on web.');
   }
