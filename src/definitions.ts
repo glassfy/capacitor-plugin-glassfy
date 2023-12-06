@@ -17,7 +17,7 @@ export enum GLASSFY_EVENT_TYPE {
   Paused = 5010,
   Resumed = 5011,
   ConnectLicense = 5012,
-  DisconnectLicense = 5013
+  DisconnectLicense = 5013,
 }
 
 export enum GLASSFY_STORE {
@@ -25,7 +25,7 @@ export enum GLASSFY_STORE {
   PlayStore = 2,
   Paddle = 3,
   Stripe = 4,
-  Glassfy = 5
+  Glassfy = 5,
 }
 
 export enum GLASSFY_LOGLEVEL {
@@ -44,7 +44,7 @@ export enum GLASSFY_ATTRIBUTION {
   IDFV = 5,
   GAID = 6,
   ASID = 7,
-  AID = 8
+  AID = 8,
 }
 
 export enum GLASSFY_REPLACEMENT_MODE {
@@ -53,7 +53,7 @@ export enum GLASSFY_REPLACEMENT_MODE {
   CHARGE_PRORATED_PRICE = 2,
   WITHOUT_PRORATION = 3,
   CHARGE_FULL_PRICE = 5,
-  DEFERRED = 6
+  DEFERRED = 6,
 }
 
 export enum GLASSFY_ENTITLEMENT {
@@ -182,20 +182,38 @@ export interface GlassfyPermission {
   readonly entitlement: GLASSFY_ENTITLEMENT;
   readonly isValid: boolean;
   readonly expireDate: string;
-  readonly accountableSkus: GlassfyAccountableSku[]
-
+  readonly accountableSkus: GlassfyAccountableSku[];
 }
 
 export interface GlassfyPermissions {
-  readonly installationId: string,
-  readonly subscriberId: string,
-  readonly originalApplicationVersion: string,
-  readonly originalApplicationDate: string,
+  readonly installationId: string;
+  readonly subscriberId: string;
+  readonly originalApplicationVersion: string;
+  readonly originalApplicationDate: string;
   readonly all: GlassfyPermission[];
 }
 
+export interface GlassfyPaddleStoreInfo {
+  readonly store: GLASSFY_STORE.Paddle;
+  readonly extravars: { [key: string]: string };
+  readonly userid: string;
+  readonly planId: string;
+  readonly subscriptionId: string;
+  readonly updateURL: string;
+  readonly cancelURL: string;
+}
+
+export interface GlassfyStoreInfo {
+  readonly store: Exclude<GLASSFY_STORE, GLASSFY_STORE.Paddle>;
+  readonly extravars: { [key: string]: string };
+}
+
+export interface GlassfyStoresInfo {
+  readonly all: (GlassfyStoreInfo | GlassfyPaddleStoreInfo)[];
+}
+
 export interface GlassfyTransaction {
-  readonly productId: string,
+  readonly productId: string;
   readonly receiptValidated: boolean;
   readonly permissions: GlassfyPermissions;
 }
@@ -211,9 +229,7 @@ export interface GlassfyAttributionItem {
   readonly value: string;
 }
 
-
 export type GlassfyExtraProperty = { [key: string]: string };
-
 
 export interface GlassfyPlugin {
   sdkVersion(): Promise<GlassfyVersion>;
@@ -221,7 +237,7 @@ export interface GlassfyPlugin {
   /**
    *  For more details, follow instruction at https://docs.glassfy.io/get-started/configuration
    */
-  initialize(options: { apiKey: string, watcherMode: boolean }): Promise<void>;
+  initialize(options: { apiKey: string; watcherMode: boolean }): Promise<void>;
 
   setLogLevel(options: { logLevel: GLASSFY_LOGLEVEL }): Promise<void>;
 
@@ -245,13 +261,24 @@ export interface GlassfyPlugin {
    */
   skuWithId(options: { identifier: string }): Promise<GlassfySku>;
 
-  skuWithIdAndStore(options: { identifier: string, store: GLASSFY_STORE }): Promise<GlassfySkuBase>;
+  skuWithIdAndStore(options: {
+    identifier: string;
+    store: GLASSFY_STORE;
+  }): Promise<GlassfySkuBase>;
 
-  connectCustomSubscriber(options: { subscriberId: string }): Promise<GlassfySku>;
+  connectCustomSubscriber(options: {
+    subscriberId: string;
+  }): Promise<GlassfySku>;
 
-  connectPaddleLicenseKey(options: { licenseKey: string, force: boolean }): Promise<void>;
+  connectPaddleLicenseKey(options: {
+    licenseKey: string;
+    force: boolean;
+  }): Promise<void>;
 
-  connectGlassfyUniversalCode(options: { universalCode: string, force: boolean }): Promise<void>;
+  connectGlassfyUniversalCode(options: {
+    universalCode: string;
+    force: boolean;
+  }): Promise<void>;
 
   setEmailUserProperty(options: { email: string }): Promise<void>;
 
@@ -261,15 +288,27 @@ export interface GlassfyPlugin {
 
   getUserProperty(): Promise<GlassfyUserProperties>;
 
-  purchaseSku(options: { sku: GlassfySku, skuToUpgrade?: GlassfySku, replacementMode?: GLASSFY_REPLACEMENT_MODE }): Promise<GlassfyTransaction>;
+  purchaseSku(options: {
+    sku: GlassfySku;
+    skuToUpgrade?: GlassfySku;
+    replacementMode?: GLASSFY_REPLACEMENT_MODE;
+  }): Promise<GlassfyTransaction>;
 
   restorePurchases(): Promise<GlassfyPermissions>;
 
-  setAttribution(options: { type: GLASSFY_ATTRIBUTION, value: string }): Promise<void>;
+  storeInfo(): Promise<GlassfyStoresInfo>;
+
+  setAttribution(options: {
+    type: GLASSFY_ATTRIBUTION;
+    value: string;
+  }): Promise<void>;
 
   setAttributions(options: { items: GlassfyAttributionItem[] }): Promise<void>;
 
-  _paywall(options: { remoteConfig: string, awaitLoading: boolean }): Promise<void>;
+  _paywall(options: {
+    remoteConfig: string;
+    awaitLoading: boolean;
+  }): Promise<void>;
 
   _closePaywall(): Promise<void>;
 

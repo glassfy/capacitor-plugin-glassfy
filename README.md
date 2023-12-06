@@ -58,6 +58,7 @@ ionic capacitor open ios
 * [`getUserProperty()`](#getuserproperty)
 * [`purchaseSku(...)`](#purchasesku)
 * [`restorePurchases()`](#restorepurchases)
+* [`storeInfo()`](#storeinfo)
 * [`setAttribution(...)`](#setattribution)
 * [`setAttributions(...)`](#setattributions)
 * [`_paywall(...)`](#_paywall)
@@ -299,6 +300,17 @@ restorePurchases() => Promise<GlassfyPermissions>
 --------------------
 
 
+### storeInfo()
+
+```typescript
+storeInfo() => Promise<GlassfyStoresInfo>
+```
+
+**Returns:** <code>Promise&lt;<a href="#glassfystoresinfo">GlassfyStoresInfo</a>&gt;</code>
+
+--------------------
+
+
 ### setAttribution(...)
 
 ```typescript
@@ -512,6 +524,34 @@ _openUrl(options: { url: string; }) => Promise<void>
 | **`permissions`**      | <code><a href="#glassfypermissions">GlassfyPermissions</a></code> |
 
 
+#### GlassfyStoresInfo
+
+| Prop      | Type                                                                                                                              |
+| --------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| **`all`** | <code>(<a href="#glassfystoreinfo">GlassfyStoreInfo</a> \| <a href="#glassfypaddlestoreinfo">GlassfyPaddleStoreInfo</a>)[]</code> |
+
+
+#### GlassfyStoreInfo
+
+| Prop            | Type                                                                                                                                             |
+| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **`store`**     | <code><a href="#exclude">Exclude</a>&lt;<a href="#glassfy_store">GLASSFY_STORE</a>, <a href="#glassfy_store">GLASSFY_STORE.Paddle</a>&gt;</code> |
+| **`extravars`** | <code>{ [key: string]: string; }</code>                                                                                                          |
+
+
+#### GlassfyPaddleStoreInfo
+
+| Prop                 | Type                                                           |
+| -------------------- | -------------------------------------------------------------- |
+| **`store`**          | <code><a href="#glassfy_store">GLASSFY_STORE.Paddle</a></code> |
+| **`extravars`**      | <code>{ [key: string]: string; }</code>                        |
+| **`userid`**         | <code>string</code>                                            |
+| **`planId`**         | <code>string</code>                                            |
+| **`subscriptionId`** | <code>string</code>                                            |
+| **`updateURL`**      | <code>string</code>                                            |
+| **`cancelURL`**      | <code>string</code>                                            |
+
+
 #### GlassfyAttributionItem
 
 | Prop        | Type                                                                |
@@ -526,6 +566,13 @@ _openUrl(options: { url: string; }) => Promise<void>
 #### GlassfyExtraProperty
 
 <code>{ [key: string]: string }</code>
+
+
+#### Exclude
+
+<a href="#exclude">Exclude</a> from T those types that are assignable to U
+
+<code>T extends U ? never : T</code>
 
 
 ### Enums

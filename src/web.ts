@@ -1,14 +1,32 @@
 import { WebPlugin } from '@capacitor/core';
 
-import type { GlassfyPlugin, GlassfyVersion, GlassfyOfferings, GlassfySku, GlassfyPermissions, GLASSFY_ATTRIBUTION, GlassfyAttributionItem, GLASSFY_LOGLEVEL, GlassfyTransaction, GlassfySkuBase, GLASSFY_STORE, GlassfyUserProperties, GlassfyPurchasesHistory, GLASSFY_REPLACEMENT_MODE } from './definitions';
+import type {
+  GlassfyPlugin,
+  GlassfyVersion,
+  GlassfyOfferings,
+  GlassfySku,
+  GlassfyPermissions,
+  GLASSFY_ATTRIBUTION,
+  GlassfyAttributionItem,
+  GLASSFY_LOGLEVEL,
+  GlassfyTransaction,
+  GlassfySkuBase,
+  GLASSFY_STORE,
+  GlassfyUserProperties,
+  GlassfyPurchasesHistory,
+  GLASSFY_REPLACEMENT_MODE,
+  GlassfyStoresInfo,
+} from './definitions';
 
 export class GlassfyWeb extends WebPlugin implements GlassfyPlugin {
-
   async sdkVersion(): Promise<GlassfyVersion> {
     throw this.unimplemented('Not supported on web.');
   }
 
-  async initialize(options: { apiKey: string, watcherMode: boolean }): Promise<void> {
+  async initialize(options: {
+    apiKey: string;
+    watcherMode: boolean;
+  }): Promise<void> {
     console.log(options);
     throw this.unimplemented('Not supported on web.');
   }
@@ -35,22 +53,33 @@ export class GlassfyWeb extends WebPlugin implements GlassfyPlugin {
     throw this.unimplemented('Not supported on web.');
   }
 
-  async skuWithIdAndStore(options: { identifier: string, store: GLASSFY_STORE }): Promise<GlassfySkuBase> {
+  async skuWithIdAndStore(options: {
+    identifier: string;
+    store: GLASSFY_STORE;
+  }): Promise<GlassfySkuBase> {
     console.log(options);
     throw this.unimplemented('Not supported on web.');
   }
 
-  connectCustomSubscriber(options: { subscriberId: string }): Promise<GlassfySku> {
+  connectCustomSubscriber(options: {
+    subscriberId: string;
+  }): Promise<GlassfySku> {
     console.log(options);
     throw this.unimplemented('Not supported on web.');
   }
 
-  connectPaddleLicenseKey(options: { licenseKey: string, force: boolean }): Promise<void> {
+  connectPaddleLicenseKey(options: {
+    licenseKey: string;
+    force: boolean;
+  }): Promise<void> {
     console.log(options);
     throw this.unimplemented('Not supported on web.');
   }
 
-  connectGlassfyUniversalCode(options: { universalCode: string, force: boolean }): Promise<void> {
+  connectGlassfyUniversalCode(options: {
+    universalCode: string;
+    force: boolean;
+  }): Promise<void> {
     console.log(options);
     throw this.unimplemented('Not supported on web.');
   }
@@ -65,7 +94,9 @@ export class GlassfyWeb extends WebPlugin implements GlassfyPlugin {
     throw this.unimplemented('Not supported on web.');
   }
 
-  async setExtraUserProperty(options: { extra: { [key: string]: any } }): Promise<void> {
+  async setExtraUserProperty(options: {
+    extra: { [key: string]: any };
+  }): Promise<void> {
     console.log(options);
     throw this.unimplemented('Not supported on web.');
   }
@@ -74,7 +105,11 @@ export class GlassfyWeb extends WebPlugin implements GlassfyPlugin {
     throw this.unimplemented('Not supported on web.');
   }
 
-  async purchaseSku(options: { sku: GlassfySku, skuToUpgrade?: GlassfySku, replacementMode?: GLASSFY_REPLACEMENT_MODE }): Promise<GlassfyTransaction> {
+  async purchaseSku(options: {
+    sku: GlassfySku;
+    skuToUpgrade?: GlassfySku;
+    replacementMode?: GLASSFY_REPLACEMENT_MODE;
+  }): Promise<GlassfyTransaction> {
     console.log(options);
     throw this.unimplemented('Not supported on web.');
   }
@@ -83,17 +118,29 @@ export class GlassfyWeb extends WebPlugin implements GlassfyPlugin {
     throw this.unimplemented('Not supported on web.');
   }
 
-  async setAttribution(options: { type: GLASSFY_ATTRIBUTION, value: string }): Promise<void> {
+  async storeInfo(): Promise<GlassfyStoresInfo> {
+    throw this.unimplemented('Not supported on web.');
+  }
+
+  async setAttribution(options: {
+    type: GLASSFY_ATTRIBUTION;
+    value: string;
+  }): Promise<void> {
     console.log(options);
     throw this.unimplemented('Not supported on web.');
   }
 
-  async setAttributions(options: { items: GlassfyAttributionItem[] }): Promise<void> {
+  async setAttributions(options: {
+    items: GlassfyAttributionItem[];
+  }): Promise<void> {
     console.log(options);
     throw this.unimplemented('Not supported on web.');
   }
 
-  async _paywall(options: { remoteConfig: string, awaitLoading: boolean }): Promise<void> {
+  async _paywall(options: {
+    remoteConfig: string;
+    awaitLoading: boolean;
+  }): Promise<void> {
     console.log(options);
     throw this.unimplemented('Not supported on web.');
   }

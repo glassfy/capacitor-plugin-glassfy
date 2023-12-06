@@ -66,7 +66,7 @@ dependencies {
     implementation project(':capacitor-android')
     implementation "androidx.appcompat:appcompat:$androidxAppCompatVersion"
     testImplementation "junit:junit:$junitVersion"
-    implementation("io.glassfy:androidglue:1.6.3")
+    implementation("io.glassfy:androidglue:1.6.4")
     implementation("io.glassfy:paywall:1.6.0")
     androidTestImplementation "androidx.test.ext:junit:$androidxJunitVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$androidxEspressoCoreVersion"

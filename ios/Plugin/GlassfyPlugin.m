@@ -23,6 +23,7 @@ CAP_PLUGIN(
     CAP_PLUGIN_METHOD(getUserProperty, CAPPluginReturnPromise);
     CAP_PLUGIN_METHOD(purchaseSku, CAPPluginReturnPromise);
     CAP_PLUGIN_METHOD(restorePurchases, CAPPluginReturnPromise);
+    CAP_PLUGIN_METHOD(storeInfo, CAPPluginReturnPromise);
     CAP_PLUGIN_METHOD(setAttribution, CAPPluginReturnPromise);
     CAP_PLUGIN_METHOD(setAttributions, CAPPluginReturnPromise);
     CAP_PLUGIN_METHOD(_paywall, CAPPluginReturnPromise);

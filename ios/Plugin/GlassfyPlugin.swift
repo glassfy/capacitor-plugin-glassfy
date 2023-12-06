@@ -37,7 +37,7 @@ public class GlassfyPlugin: CAPPlugin {
             withApiKey: apiKey, 
             watcherMode: watcherMode, 
             crossPlatformSdkFramework: "capacitor",
-            crossPlatformSdkVersion: "3.3.0",
+            crossPlatformSdkVersion: "3.3.1",
             withCompletion: self.convertResponseFromGlassfyGlue(call)
         )
     }
@@ -165,6 +165,10 @@ public class GlassfyPlugin: CAPPlugin {
     
     @objc func restorePurchases(_ call: CAPPluginCall) {
         GlassfyGlue.restorePurchases(completion: self.convertResponseFromGlassfyGlue(call));
+    }
+
+    @objc func storeInfo(_ call: CAPPluginCall) {
+        GlassfyGlue.storeInfo(completion: self.convertResponseFromGlassfyGlue(call));
     }
 
     @objc func setAttribution(_ call: CAPPluginCall) {

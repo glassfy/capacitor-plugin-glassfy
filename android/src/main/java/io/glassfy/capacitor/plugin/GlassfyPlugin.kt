@@ -62,7 +62,7 @@ class GlassfyPlugin : Plugin() {
             apiKey,
             watcherMode,
             "capacitor",
-            "3.3.0"
+            "3.3.1"
         ) { value, error -> pluginCompletion(call, value, error) }
     }
 
@@ -265,6 +265,11 @@ class GlassfyPlugin : Plugin() {
     @PluginMethod
     fun restorePurchases(call: PluginCall) {
         GlassfyGlue.restorePurchases() { value, error -> pluginCompletion(call, value, error) }
+    }
+
+    @PluginMethod
+    fun storeInfo(call: PluginCall) {
+        GlassfyGlue.storeInfo() { value, error -> pluginCompletion(call, value, error) }
     }
 
     @PluginMethod
