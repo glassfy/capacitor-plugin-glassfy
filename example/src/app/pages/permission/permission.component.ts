@@ -13,16 +13,16 @@ import { GlassfyPermission } from '../../../../../dist/esm';
 export class PermissionComponent implements OnInit {
   level = 1;
 
-  permission$: Observable<GlassfyPermission>
+  permission$: Observable<GlassfyPermission>;
 
-  constructor(
-    private route: ActivatedRoute,
-    private glassfy: GlassfyService) { }
+  constructor(private route: ActivatedRoute, private glassfy: GlassfyService) {}
 
   ngOnInit() {
     const permissionId = this.route.snapshot.paramMap.get('id');
     this.permission$ = this.glassfy.permissions$.pipe(
-      map((permissions) => { return permissions.all.find((p) => p.permissionId == permissionId) })
+      map(permissions => {
+        return permissions.all.find(p => p.permissionId == permissionId);
+      }),
     );
   }
 }

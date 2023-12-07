@@ -1,6 +1,5 @@
 {
 	"appId": "com.glassfy.androidexample",
 	"appName": "example",
-	"webDir": "www",
-	"bundledWebRuntime": false
+	"webDir": "www/browser"
 }

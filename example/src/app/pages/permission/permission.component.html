@@ -3,16 +3,18 @@
     <ion-buttons slot="start">
       <ion-back-button *ngIf="level > 0"></ion-back-button>
     </ion-buttons>
-    <ion-title>Permission - {{(permission$ | async).permissionId}}</ion-title>
+    <ion-title>Permission - {{ (permission$ | async).permissionId }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content color="light">
-  <ng-container *ngIf="(permission$ | async) as p">
+  <ng-container *ngIf="permission$ | async as p">
     <ion-card>
       <ion-card-header>
-        <ion-card-title>Entitlement {{p.entitlement}}</ion-card-title>
-        <ion-card-subtitle>{{p.accountableSkus.length}} AccountableSkus</ion-card-subtitle>
+        <ion-card-title>Entitlement {{ p.entitlement }}</ion-card-title>
+        <ion-card-subtitle
+          >{{ p.accountableSkus.length }} AccountableSkus</ion-card-subtitle
+        >
       </ion-card-header>
     </ion-card>
 

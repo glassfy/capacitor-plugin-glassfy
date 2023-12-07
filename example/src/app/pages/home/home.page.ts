@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertController, NavController } from '@ionic/angular';
-import { Glassfy, GlassfyPermission, GlassfyPermissions, GlassfyOffering, GlassfyOfferings } from 'capacitor-plugin-glassfy';
-import { Observable, from} from 'rxjs';
-import { map } from 'rxjs/operators';
+import { AlertController } from '@ionic/angular';
+import {
+  GLASSFY_STORE,
+} from 'capacitor-plugin-glassfy';
 import { GlassfyService } from '../../services/glassfy.service';
 
 @Component({
@@ -13,14 +13,19 @@ import { GlassfyService } from '../../services/glassfy.service';
 })
 export class HomePage {
   level = 0;
-  
-  constructor(public alertController: AlertController, private router: Router, public glassfy: GlassfyService) {}
+
+  constructor(
+    public alertController: AlertController,
+    private router: Router,
+    public glassfy: GlassfyService,
+  ) {
+  }
 
   openPermission(permId: string) {
-    this.router.navigate(['/home','permission', {id: permId}])
+    this.router.navigate(['/home', 'permission', { id: permId }]);
   }
 
   openOffering(offId: string) {
-    this.router.navigate(['/home','offering', { id: offId }])
+    this.router.navigate(['/home', 'offering', { id: offId }]);
   }
 }

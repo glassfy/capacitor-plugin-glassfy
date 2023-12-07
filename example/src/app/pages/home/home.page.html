@@ -7,20 +7,14 @@
   </ion-toolbar>
 </ion-header>
 
-
-
 <ion-content color="light">
   <ion-card>
     <ion-card-header>
       <ion-card-title>Version</ion-card-title>
     </ion-card-header>
 
-    <ion-card-content>
-      {{ glassfy.version$ | async }}
-    </ion-card-content>
+    <ion-card-content> {{ glassfy.version$ | async }} </ion-card-content>
   </ion-card>
-
-
 
   <ion-card>
     <ion-card-header>
@@ -28,11 +22,19 @@
     </ion-card-header>
     <ion-card-content>
       <ion-list>
-        <ng-container *ngIf="(glassfy.permissions$ | async) as permissions; else loading">
-          <ion-item button *ngFor="let permission of permissions.all; let last = last" (click)="openPermission(permission.permissionId)"
-            [lines]="last ? 'none' : 'inset'">
+        <ng-container
+          *ngIf="(glassfy.permissions$ | async) as permissions; else loading"
+        >
+          <ion-item
+            button
+            *ngFor="let permission of permissions.all; let last = last"
+            (click)="openPermission(permission.permissionId)"
+            [lines]="last ? 'none' : 'inset'"
+          >
             <ion-label>{{ permission.permissionId }}</ion-label>
-            <ion-note slot="end">{{ permission.accountableSkus.length }}</ion-note>
+            <ion-note slot="end"
+              >{{ permission.accountableSkus.length }}</ion-note
+            >
           </ion-item>
         </ng-container>
       </ion-list>
@@ -45,9 +47,15 @@
     </ion-card-header>
     <ion-card-content>
       <ion-list>
-        <ng-container *ngIf="(glassfy.offerings$ | async) as offerings; else loading">
-          <ion-item button *ngFor="let offering of offerings.all; let last = last"
-            (click)="openOffering(offering.offeringId)" [lines]="last ? 'none' : 'inset'">
+        <ng-container
+          *ngIf="(glassfy.offerings$ | async) as offerings; else loading"
+        >
+          <ion-item
+            button
+            *ngFor="let offering of offerings.all; let last = last"
+            (click)="openOffering(offering.offeringId)"
+            [lines]="last ? 'none' : 'inset'"
+          >
             <ion-label>{{ offering.offeringId }}</ion-label>
             <ion-note slot="end">{{ offering.skus.length }}</ion-note>
           </ion-item>
@@ -57,9 +65,6 @@
   </ion-card>
 
   <ng-template #loading>
-    <ion-item lines="none">
-      Loading...
-    </ion-item>
+    <ion-item lines="none"> Loading... </ion-item>
   </ng-template>
-
 </ion-content>

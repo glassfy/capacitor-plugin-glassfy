@@ -11,8 +11,12 @@ import { OfferingComponent } from './pages/offering/offering.component';
 import { PermissionComponent } from './pages/permission/permission.component';
 
 @NgModule({
-  declarations: [AppComponent, HomePage, PermissionComponent, OfferingComponent],
-  entryComponents: [],
+  declarations: [
+    AppComponent,
+    HomePage,
+    PermissionComponent,
+    OfferingComponent,
+  ],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
