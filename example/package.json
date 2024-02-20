@@ -23,9 +23,9 @@
     "@capacitor/ios": "^5.0.0",
     "@capacitor/keyboard": "^5.0.0",
     "@capacitor/status-bar": "^5.0.0",
-    "@ionic/angular": "^6.0.0",
+    "@ionic/angular": "^7.0.0",
     "capacitor-plugin-glassfy": "file:..",
-    "rxjs": "~6.6.0",
+    "rxjs": "~7.5.0",
     "tslib": "^2.2.0",
     "zone.js": "~0.14.2"
   },
