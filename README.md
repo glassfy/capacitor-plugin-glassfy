@@ -186,14 +186,12 @@ skuWithIdAndStore(options: { identifier: string; store: GLASSFY_STORE; }) => Pro
 ### connectCustomSubscriber(...)
 
 ```typescript
-connectCustomSubscriber(options: { subscriberId: string; }) => Promise<GlassfySku>
+connectCustomSubscriber(options: { subscriberId: string; }) => Promise<void>
 ```
 
 | Param         | Type                                   |
 | ------------- | -------------------------------------- |
 | **`options`** | <code>{ subscriberId: string; }</code> |
-
-**Returns:** <code>Promise&lt;<a href="#glassfysku">GlassfySku</a>&gt;</code>
 
 --------------------
 
