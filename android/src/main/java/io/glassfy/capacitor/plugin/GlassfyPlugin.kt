@@ -217,7 +217,7 @@ class GlassfyPlugin : Plugin() {
     }
 
     @PluginMethod
-    fun getUserProperties(call: PluginCall) {
+    fun getUserProperty(call: PluginCall) {
         GlassfyGlue.getExtraUserProperty() { value, error -> pluginCompletion(call, value, error) }
     }
 
