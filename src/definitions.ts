@@ -268,7 +268,7 @@ export interface GlassfyPlugin {
 
   connectCustomSubscriber(options: {
     subscriberId: string;
-  }): Promise<GlassfySku>;
+  }): Promise<void>;
 
   connectPaddleLicenseKey(options: {
     licenseKey: string;

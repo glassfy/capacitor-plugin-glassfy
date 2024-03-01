@@ -63,7 +63,7 @@ export class GlassfyWeb extends WebPlugin implements GlassfyPlugin {
 
   connectCustomSubscriber(options: {
     subscriberId: string;
-  }): Promise<GlassfySku> {
+  }): Promise<void> {
     console.log(options);
     throw this.unimplemented('Not supported on web.');
   }
