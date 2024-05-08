@@ -3,7 +3,7 @@
 [![npm](https://img.shields.io/npm/v/capacitor-plugin-glassfy)](https://www.npmjs.com/package/capacitor-plugin-glassfy)
 
 > **Warning** <br/>
-> These plugin is for Capacitor 5. For Capacitor 4, use the 2.x version.
+> These plugin is for Capacitor 6. For Capacitor 5, use the 3.x version.
 
 ### CapacitorJS Glassfy Plugin
 
